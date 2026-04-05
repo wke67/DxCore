@@ -319,6 +319,30 @@ jobs:
             pincount: 28
             clocksource: crystal
             flash-class: 16
+          - device-family: du
+            pincount: 14
+            clocksource: crystal
+            flash-class: 16
+          - device-family: du
+            pincount: 20
+            clocksource: extclock
+            flash-class: 16
+          - device-family: du
+            pincount: 14
+            clocksource: extclock
+            flash-class: 32
+          - device-family: du
+            pincount: 20
+            clocksource: crystal
+            flash-class: 32
+          - device-family: du
+            pincount: 32
+            clocksource: extclock
+            flash-class: 64
+          - device-family: du
+            pincount: 28
+            clocksource: crystal
+            flash-class: 64
           - device-family: dd
             pincount: 32
             clocksource: internal
@@ -379,6 +403,38 @@ jobs:
             pincount: 28
             clocksource: extclock
             flash-class: 32
+          - device-family: da
+            pincount: 28
+            clocksource: internal
+            flash-class: 64
+          - device-family: da
+            pincount: 32
+            clocksource: extclock
+            flash-class: 64
+          - device-family: da
+            pincount: 48
+            clocksource: internal
+            flash-class: 64
+          - device-family: da
+            pincount: 64
+            clocksource: extclock
+            flash-class: 64
+          - device-family: da
+            pincount: 28
+            clocksource: extclock
+            flash-class: 128
+          - device-family: da
+            pincount: 32
+            clocksource: internal
+            flash-class: 128
+          - device-family: da
+            pincount: 48
+            clocksource: extclock
+            flash-class: 128
+          - device-family: da
+            pincount: 64
+            clocksource: internal
+            flash-class: 128
           - device-family: db
             pincount: 48
             clocksource: extclock
@@ -493,7 +549,7 @@ jobs:
           enable-warnings-report: true
           sketches-report-path: sketches-reports
       - name: Compile examples (8 MHz, optiboot (if available), tca0 millis, full printf, and manual attachInterrupt)
-        if: matrix.device-family != 'ea' && matrix.device-family != 'eb'
+        if: matrix.device-family != 'ea' && matrix.device-family != 'eb' && matrix.device-family != 'du'
         uses: arduino/compile-sketches@main
         with:
           cli-version: 0.33.0

@@ -144,27 +144,14 @@ void printTCE0Status() {
   MYSERIAL.println();
 }
 #endif
-#if defined(TCF0)
-void printTCE0Status() {
-  uint16_t test = (uint16_t)&TCF0;
-  volatile uint8_t *bp;
-  bp = (volatile uint8_t *)test;
-  for (uint8_t i = 4; i; i--) {
-    if (i != 4) {
-      MYSERIAL.println();
-    }
-    bp = MYSERIAL.printHex(bp, (uint8_t) 16, ':');
-  }
-  MYSERIAL.println();
-}
-#endif
+
 uint8_t SuccessCount = 0;
 uint8_t AttemptCount = 0;
 uint8_t SkipCount = 0;
 uint8_t tcactrla = 0;
 
 uint8_t CurrentPortmux = 255;
-uint8_t CurrentTimer = tca0; // TCA0
+uint8_t CurrentTimer = _tca0; // TCA0
 static uint8_t CurrentChannel = 0;
 uint8_t CurrentPin = NOT_A_PIN;
 uint8_t CurrentTimerIndex = 0;
@@ -193,6 +180,7 @@ void setup() {
   MYSERIAL.println("PWM selftest");
   CurrentTimer = MyTimers[0];
   delay(1000);
+  #if defined(TCA0)
   for (byte x = 0; x < 7; x++) {
     for (byte y = 0; y < 6; y++) {
       MYSERIAL.print(TCA0pinsets[6 * x + y]);
@@ -201,6 +189,7 @@ void setup() {
     MYSERIAL.println();
   }
   MYSERIAL.println();
+  #endif
   #ifdef TCA1
   for (byte x = 0; x < 6; x++) {
     for (byte y = 0; y < 6; y++) {
@@ -232,7 +221,6 @@ void setup() {
   }
   MYSERIAL.println();
   #endif
-  */
   #ifdef TCF0
   for (byte x = 0; x < 8; x++) {
     for (byte y = 0; y < 2; y++) {
@@ -243,6 +231,9 @@ void setup() {
   }
   MYSERIAL.println();
   #endif
+
+
+  */
   analogWrite(PIN_PD6, 128);
   delay(100);
   uint8_t dacpassed = 0;
@@ -424,6 +415,7 @@ void loop() {
   switch (timertype) {
     case 0: {
         //TCA
+      #if defined(TCA0)
         if (CurrentChannel >= 5) {
           MYSERIAL.println();
           CurrentChannel = 0;
@@ -446,6 +438,7 @@ void loop() {
           CurrentChannel++;
         }
         break;
+      #endif
       }
     case 1: {
         //TCB
