@@ -57,6 +57,7 @@ jobs:
         # Filter out these matrix combinations
 
         exclude:
+          - clocksource: extclock
           # Things w/out xtals
           - device-family: da
             clocksource: crystal
