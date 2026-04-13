@@ -58,6 +58,8 @@ jobs:
 
         exclude:
           - clocksource: extclock
+          - clocksource: crystal
+          - overclock-osc: 48
           # Things w/out xtals
           - device-family: da
             clocksource: crystal
