@@ -380,12 +380,16 @@ jobs:
           #flashsizes
           - device-family: eb
             flash-class: 64
+          - device-family: eb
+            flash-class: 128
           - device-family: la
             flash-class: 64
           - device-family: ea
             pincount: 28
             clocksource: extclock
             flash-class: 32
+          - device-family: ea
+            flash-class: 128
           - device-family: ea
             pincount: 32
             clocksource: internal
