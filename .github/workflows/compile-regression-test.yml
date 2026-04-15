@@ -3,7 +3,7 @@
 #   only one flash-size per package
 #   51 runs
 
-name: "compile regession test"
+name: "Regession Test"
 
 on:
   # workflow_dispatch event allows the workflow to be triggered manually
@@ -19,9 +19,9 @@ jobs:
 
     env:
       platform-name: DxCore:megaavr
-      all-parts-sketch-paths: >
-        ~/test/act/dummysketch
-        ~/test/act/macros
+      all-parts-sketch-paths: |
+        - megaavr/extras/ci/test-sketch/all/dummysketch
+        - megaavr/extras/ci/test-sketch/all/macros
 
     strategy:
       fail-fast: true
