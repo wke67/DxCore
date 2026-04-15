@@ -1,0 +1,194 @@
+# Compile regression test
+#   uses internal clock only
+#   only one flash-size per package
+#   51 runs
+#
+#   using act to run local
+
+name: "compile regession test"
+
+on:
+  # workflow_dispatch event allows the workflow to be triggered manually
+  # See: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
+  workflow_dispatch:
+  # repository_dispatch event allows the workflow to be triggered via the GitHub API
+  # See: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#repository_dispatch
+  repository_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    env:
+      platform-name: DxCore:megaavr
+      all-parts-sketch-paths: >
+        ~/test/act/dummysketch
+        ~/test/act/macros
+
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+
+      matrix:
+        flash-class:
+          - 128
+          - 64
+          - 32
+          - 16
+        device-family:
+          - da
+          - db
+          - dd
+          - du
+          - ea
+          - eb
+          - ec
+          - la
+        pincount:
+          - 64
+          - 48
+          - 32
+          - 28
+          - 20
+          - 14
+        clocksource:
+          - internal
+          - extclock
+          - crystal
+        int-osc:
+          - 20
+          - 24
+        mvio:
+          - mvio=disabled,
+          - ""
+
+        # Filter out these matrix combinations
+
+        exclude:
+          # Filter one flash-class per package
+          - flash-class: 16
+          - flash-class: 128
+          - device-family: da
+            flash-class: 32
+          - device-family: db
+            flash-class: 32
+          - device-family: dd
+            flash-class: 32
+          - device-family: ea
+            flash-class: 64
+
+          # Filter clock source
+          - clocksource: extclock
+          - clocksource: crystal
+          #- int-osc: 24
+          #- mvio: mvio=disabled,
+
+          # Things w/out mvio
+          - device-family: da
+            mvio: mvio=disabled,
+          - device-family: db
+            mvio: mvio=disabled,
+          - device-family: du
+            mvio: mvio=disabled,
+          - device-family: ea
+            mvio: mvio=disabled,
+          - device-family: eb
+            mvio: mvio=disabled,
+
+          # Filter avaliable parts for DA DB DU
+          # Things w/out xtals
+          - device-family: da
+            clocksource: crystal
+
+          # DA limits. No 8/16k flash, no 32k 64-pin. No 20/14 pin.
+          - device-family: da
+            flash-class: 32
+            pincount: 64
+          - device-family: da
+            flash-class: 16
+          - device-family: da
+            pincount: 20
+          - device-family: da
+            pincount: 14
+
+          # DB limits. No 8/16k flash, no 32k 64-pin. No 20/14 pin.
+          - device-family: db
+            flash-class: 32
+            pincount: 64
+          - device-family: db
+            flash-class: 16
+          - device-family: db
+            pincount: 20
+          - device-family: db
+            pincount: 14
+
+          # DD limits. No 128k/8k flash, no 64/48 pin.
+          - device-family: dd
+            flash-class: 128
+          - device-family: dd
+            pincount: 64
+          - device-family: dd
+            pincount: 48
+
+          # DU limits. No 128k/8k flash, no 64/48 pin. No 64k 20/14pin.
+          - device-family: du
+            flash-class: 128
+          - device-family: du
+            pincount: 64
+          - device-family: du
+            pincount: 48
+          - device-family: du
+            pincount: 20
+            flash-class: 64
+          - device-family: du
+            pincount: 14
+            flash-class: 64
+
+          # Filter avaliable parts for EA EB EC LA
+          # Things we can't get yet
+          - device-family: ec
+          - device-family: la
+          # Things w/out xtals
+          - device-family: eb
+            clocksource: crystal
+          # Internal Clock
+          - device-family: ea
+            int-osc: 24
+          - device-family: eb
+            int-osc: 24
+
+          # Pincounts
+          - device-family: eb
+            pincount: 64
+          - device-family: eb
+            pincount: 48
+          - device-family: ea
+            pincount: 64
+          - device-family: la
+            pincount: 64
+          - device-family: la
+            pincount: 48
+          - device-family: ea
+            pincount: 14
+          - device-family: ea
+            pincount: 20
+
+          #flashsizes
+          - device-family: ea
+            flash-class: 128
+          - device-family: eb
+            flash-class: 64
+          - device-family: eb
+            flash-class: 128
+          - device-family: la
+            flash-class: 64
+
+    steps:
+      - name: compile
+        run: |
+          fqbn=${{ env.platform-name }}:avr${{ matrix.device-family }}:chip=avr${{ matrix.flash-class }}${{ matrix.device-family }}${{ matrix.pincount }},clock=${{matrix.int-osc}}${{ matrix.clocksource }},${{ matrix.mvio }}wiremode=mands,flmap=lockdefault
+          echo FQBN $fqbn
+          for sketch in ${{ env.all-parts-sketch-paths }}  do
+            echo $sketch
+            arduino-cli compile --clean -b $fqbn $sketch
+          done
