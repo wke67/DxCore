@@ -79,6 +79,7 @@ jobs:
         - megaavr/extras/ci/test-sketch/all/test_tone
         - megaavr/extras/ci/test-sketch/all/test_PWM
         - megaavr/extras/ci/test-sketch/all/test_timekeeping
+        - megaavr/extras/ci/test-sketch/all/macros
       avr-da-series-sketch-paths: |
         - megaavr/extras/ci/test-sketch/da/dummysketch
         - megaavr/libraries/ZCD/examples/Interrupt
