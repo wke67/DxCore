@@ -50,19 +50,29 @@ jobs:
         int-osc:
           - 20
           - 24
-        overclock-osc:
-          - 16
-          - 32
-          - 48
+        mvio:
+          - mvio=disabled,
+          - ""
+
         # Filter out these matrix combinations
 
         exclude:
           - clocksource: extclock
           - clocksource: crystal
-          - overclock-osc: 48
           # Things w/out xtals
           - device-family: da
             clocksource: crystal
+          - device-family: da
+            mvio: mvio=disabled,
+          - device-family: db
+            mvio: mvio=disabled,
+          - device-family: du
+            mvio: mvio=disabled,
+          - device-family: ea
+            mvio: mvio=disabled,
+          - device-family: eb
+            mvio: mvio=disabled,
+
           # DA limits. No 8/16k flash, no 32k 64-pin. No 20/14 pin.
           - device-family: da
             flash-class: 32
@@ -109,52 +119,6 @@ jobs:
             device-family: db
           - int-osc: 20
             device-family: dd
-          # ugly Dx/Ex hack. No 16 MHz DB xtal tests, DA ext 16 MHz, DD 16 MHz xtal.  Ex @ 48 excluded further down.
-          - overclock-osc: 48
-            clocksource: internal
-          - overclock-osc: 48
-            device-family: dd
-            clocksource: crystal
-          - overclock-osc: 48
-            device-family: db
-            clocksource: extclock
-          - overclock-osc: 48
-            device-family: da
-            clocksource: extclock
-          - overclock-osc: 32
-            device-family: db
-            clocksource: internal
-          - overclock-osc: 32
-            device-family: db
-            clocksource: crystal
-          - overclock-osc: 32
-            device-family: dd
-            clocksource: crystal
-          - overclock-osc: 32
-            device-family: da
-            clocksource: extclock
-          - overclock-osc: 32
-            device-family: dd
-            clocksource: extclock
-          - overclock-osc: 16
-            device-family: da
-            clocksource: internal
-          - overclock-osc: 16
-            device-family: dd
-            clocksource: internal
-          - overclock-osc: 16
-            device-family: db
-            clocksource: crystal
-          - overclock-osc: 16
-            device-family: db
-            clocksource: extclock
-          - overclock-osc: 16
-            device-family: dd
-            clocksource: extclock
-          - overclock-osc: 48
-            device-family: du
-          - overclock-osc: 32
-            device-family: du
           - device-family: du
             pincount: 20
             int-osc: 20
@@ -288,24 +252,12 @@ jobs:
             clocksource: extclock
             flash-class: 32
           - device-family: da
-            pincount: 32
-            clocksource: internal
-            flash-class: 32
-          - device-family: da
             pincount: 28
             clocksource: extclock
             flash-class: 32
           - device-family: da
-            pincount: 28
-            clocksource: internal
-            flash-class: 64
-          - device-family: da
             pincount: 32
             clocksource: extclock
-            flash-class: 64
-          - device-family: da
-            pincount: 48
-            clocksource: internal
             flash-class: 64
           - device-family: da
             pincount: 64
@@ -316,16 +268,8 @@ jobs:
             clocksource: extclock
             flash-class: 128
           - device-family: da
-            pincount: 32
-            clocksource: internal
-            flash-class: 128
-          - device-family: da
             pincount: 48
             clocksource: extclock
-            flash-class: 128
-          - device-family: da
-            pincount: 64
-            clocksource: internal
             flash-class: 128
           - device-family: db
             pincount: 48
@@ -357,13 +301,6 @@ jobs:
           # Things w/out xtals
           - device-family: eb
             clocksource: crystal
-          # The inappropriate clock sources:
-          # Unsupported
-          - clocksource: internal
-            overclock-osc: 32
-          #redundant
-          - int-osc: 16
-            overclock-osc: 16
           # Pincounts
           - device-family: eb
             pincount: 64
@@ -461,13 +398,6 @@ jobs:
           # Things w/out xtals
           - device-family: eb
             clocksource: crystal
-          # The inappropriate clock sources:
-          # Unsupported
-          - clocksource: internal
-            overclock-osc: 32
-          #redundant
-          - int-osc: 16
-            overclock-osc: 16
           # Pincounts
           - device-family: eb
             pincount: 64
@@ -556,11 +486,16 @@ jobs:
             pincount: 32
             clocksource: extclock
             flash-class: 16
+          - device-family: ea
+            int-osc: 24
+          - device-family: eb
+            int-osc: 24
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          ref: rtc-fix
+          ref: test
 
       # See: https://github.com/arduino/compile-sketches/README.md
 
@@ -568,7 +503,7 @@ jobs:
         uses: arduino/compile-sketches@main
         with:
           cli-version: 0.33.0
-          fqbn: ${{ env.platform-name }}:avr${{ matrix.device-family }}:chip=avr${{ matrix.flash-class }}${{ matrix.device-family }}${{ matrix.pincount }},clock=${{matrix.int-osc}}${{ matrix.clocksource }},wiremode=mands,flmap=lockdefault
+          fqbn: ${{ env.platform-name }}:avr${{ matrix.device-family }}:chip=avr${{ matrix.flash-class }}${{ matrix.device-family }}${{ matrix.pincount }},clock=${{matrix.int-osc}}${{ matrix.clocksource }},${{ matrix.mvio }}wiremode=mands,flmap=lockdefault
           sketch-paths: |
             # It's necessary to jump through some hoops to dynamically generate the env object keys to define the non-universal sketch paths
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#format
@@ -584,7 +519,7 @@ jobs:
             # The sketches don't have any external library dependencies, so just define an empty array
             -
           verbose: false
-          enable-deltas-report: true
+          enable-deltas-report: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-warnings-report: true
           sketches-report-path: sketches-reports
