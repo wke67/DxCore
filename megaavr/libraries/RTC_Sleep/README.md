@@ -11,14 +11,18 @@ uses the running RTC to implement a delay() equivalent that
 sends the chip into low power Sleep_Standby_Mode during delay.
 In this case, the code relies on the RTC interrupt routine
 in DxCore/../cores/.../wiring.c which needs to store the
-interrupt flags to __rtc_intflags.
+interrupt flags to __rtc_intflags. (DxCore update required!)
 
 If the RTC Timer is not used, the RTC XTAL oscillator is
 initialized on the first call to rtc_sleep() and the RTC
 interrput by this library.If a millis() timer is active
 the millis() function is updated but the time returned is 
-not correct to the ms.
+not correct to the ms. The rtc_millis_xx() functions will
+work also is timers are disabled in the Arduino IDE.
 
 The library provides:
 - `RTC_Sleep.h`
-- `void rtc_sleep(uint32_t ms)`
+- `void rtc_sleep(unsigned long time)`
+- `unsigned long rtc_millis()`
+- `void rtc_set_millis(uint32_t newmillis)`
+- `void rtc_reset_millis()`

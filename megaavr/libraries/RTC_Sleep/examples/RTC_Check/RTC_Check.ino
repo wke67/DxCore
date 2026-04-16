@@ -10,8 +10,8 @@ void setup()
     Serial.printf("start\n");
     Serial.flush();
     rtc_sleep(1);
-    while(millis() < 3) ; // wait for XTAL start-up
-    set_millis(0);
+    while(rtc_millis() < 3) ; // wait for XTAL start-up
+    rtc_set_millis(0);
 }
 
 long t=8192, time=0;
@@ -20,9 +20,9 @@ void loop()
 {
     t=2000;// 8192;
     rtc_sleep(t);
-    t=millis();
+    t=rtc_millis();
     delta=t-time;
-    Serial.printf("time %ld  %ld  0x%2.2x\n", t, delta, SLPCTRL.CTRLA);
+    Serial.printf("time %ld  %ld  %ld\n", t, delta, timer_overflow_count);
     time=t;
     Serial.flush();
 }
