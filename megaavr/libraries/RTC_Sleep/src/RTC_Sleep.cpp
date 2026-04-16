@@ -56,9 +56,9 @@ static void rtc_sleep_setup()
   RTC_INTCTRL = RTC_OVF_bm;
 }
 
+// from wiring.c
 unsigned long rtc_millis()
 {
-  // copied from wiring.c
   // return timer_overflow_count; // for debugging timekeeping issues where these variables are out of scope from the sketch
   unsigned long m;
   // disable interrupts while we read timer_millis or we might get an
