@@ -582,7 +582,7 @@ jobs:
             # The sketches don't have any external library dependencies, so just define an empty array
             -
           verbose: false
-          enable-deltas-report: true
+          enable-deltas-report: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          enable-warnings-report: true
+          enable-warnings-report: false
           sketches-report-path: sketches-reports
