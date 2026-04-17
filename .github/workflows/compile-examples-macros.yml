@@ -165,13 +165,6 @@ jobs:
           - device-family: eb
             int-osc: 24
 
-<<<<<<< HEAD
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          ref: macrosII
-=======
           # Pincounts
           - device-family: eb
             pincount: 64
@@ -212,7 +205,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
->>>>>>> upstream/master
 
       # See: https://github.com/arduino/compile-sketches/README.md
 
@@ -220,11 +212,7 @@ jobs:
         uses: arduino/compile-sketches@main
         with:
           cli-version: 0.33.0
-<<<<<<< HEAD
-          fqbn: ${{ env.platform-name }}:avr${{ matrix.opti }}${{ matrix.device-family }}:chip=avr${{ matrix.flash-class }}${{ matrix.device-family }}${{ matrix.pincount }},clock=${{matrix.int-osc}}${{ matrix.clocksource }},${{ matrix.mvio }}wiremode=mands,flmap=lockdefault
-=======
           fqbn: ${{ env.platform-name }}:avr${{ matrix.device-family }}${{ matrix.opti }}:chip=avr${{ matrix.flash-class }}${{ matrix.device-family }}${{ matrix.pincount }},clock=${{matrix.int-osc}}${{ matrix.clocksource }},${{ matrix.mvio }}wiremode=mands,flmap=lockdefault
->>>>>>> upstream/master
           sketch-paths: |
             # It's necessary to jump through some hoops to dynamically generate the env object keys to define the non-universal sketch paths
             # https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#format
