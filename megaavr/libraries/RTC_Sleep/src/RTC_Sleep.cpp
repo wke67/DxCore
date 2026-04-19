@@ -27,18 +27,17 @@ static uint32_t timer_overflow_count;
 static char  __rtc_intflags;
 
 ISR(RTC_CNT_vect) {
-    // if RTC is used as timer, we only increment the overflow count
-    // Overflow count isn't used for TCB's
-    // both are needed for TCA and TCD.
-    if (RTC.INTFLAGS & RTC_OVF_bm) {
-        timer_overflow_count++;
-    }
-    __rtc_intflags = RTC.INTFLAGS;
-    RTC.INTFLAGS = RTC_OVF_bm | RTC_CMP_bm; // clear flag
+  // if RTC is used as timer, we only increment the overflow count
+  // Overflow count isn't used for TCB's
+  // both are needed for TCA and TCD.
+  if (RTC.INTFLAGS & RTC_OVF_bm) {
+    timer_overflow_count++;
+  }
+  __rtc_intflags = RTC.INTFLAGS;
+  RTC.INTFLAGS = RTC_OVF_bm | RTC_CMP_bm; // clear flag
 }
 
-static void rtc_sleep_setup()
-{
+static void rtc_sleep_setup() {
 // set up RTC with 32kHz crystal running at 1024 Hz
   _PROTECTED_WRITE(CLKCTRL_XOSC32KCTRLA, (CLKCTRL_RUNSTDBY_bm | CLKCTRL_ENABLE_bm | CLKCTRL_CSUT_16K_gc | CLKCTRL_LPMODE_bm)) ;
   RTC_CTRLA=RTC_RUNSTDBY_bm | RTC_PRESCALER_DIV32_gc | RTC_RTCEN_bm;
@@ -57,8 +56,7 @@ static void rtc_sleep_setup()
 }
 
 // from wiring.c
-unsigned long rtc_millis()
-{
+unsigned long rtc_millis() {
   // return timer_overflow_count; // for debugging timekeeping issues where these variables are out of scope from the sketch
   unsigned long m;
   // disable interrupts while we read timer_millis or we might get an
@@ -82,8 +80,7 @@ unsigned long rtc_millis()
   return m;
 }
 
-void rtc_set_millis(uint32_t newmillis)
-{
+void rtc_set_millis(uint32_t newmillis) {
   // millis = 1000/1024*(timer_overflow_count << 16 + RTC.CNT)
   uint8_t oldSREG = SREG; // save SREG
   newmillis = ((newmillis/125)<<7) + (((newmillis%125)<<7)+62)/125;  // *1024/1000
@@ -94,8 +91,7 @@ void rtc_set_millis(uint32_t newmillis)
   SREG = oldSREG; // reenable interrupts if we killed them,
 }
 
-void rtc_reset_millis()
-{
+void rtc_reset_millis() {
   rtc_set_millis(0);
 }
 
@@ -104,17 +100,16 @@ static uint8_t startup=1;
 extern char __rtc_intflags;
 #endif
 
-void rtc_sleep(unsigned long dly)
-{
+void rtc_sleep(unsigned long dly) {
   volatile unsigned int cntr, cnt;
   #ifndef MILLIS_USE_TIMERNONE
   #endif
 
   #ifndef MILLIS_USE_TIMERRTC
-  if ( startup ) {
+    if ( startup ) {
       rtc_sleep_setup();
       startup = 0;
-  }
+    }
   #endif
 
   dly = dly + (dly>>6) + (dly>>7) + (dly>>11) + (dly>>14); // ms -> 1024Hz

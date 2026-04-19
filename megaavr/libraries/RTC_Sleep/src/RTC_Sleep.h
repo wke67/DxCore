@@ -9,8 +9,8 @@ void rtc_set_millis(uint32_t newmillis);
 void rtc_reset_millis();
 
 #ifdef  MILLIS_USE_TIMERRTC
-#define rtc_millis        millis
-#define rtc_reset_millis  reset_millis
-#define rtc_set_millis    set_millis
+  #define rtc_millis        millis
+  #define rtc_reset_millis  reset_millis
+  #define rtc_set_millis    set_millis
 #endif
 #endif
