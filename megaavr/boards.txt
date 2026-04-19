@@ -4593,8 +4593,8 @@ avrddopti.menu.flmap.locksection0.build.flmapabr=.fl0
 
 avreaopti.build.board=avrea
 avreaopti.build.core=dxcore
-# The maximum size and data size attributes are overridden by the selected chip. If you are avoiding specifying that somehow, there is no hope of anything working, so don't do that.
-# Each top-level entry supports at least a dozen parts with varying memory constraints.
+avreaopti.upload.maximum_size=0
+avreaopti.upload.maximum_data_size=0
 avreaopti.build.f_cpu={build.speed}000000L
 avreaopti.build.text_section_start=.text=0x200
 avreaopti.build.extra_flags= -DSERIAL_PORT_BOOT={bootloader.portname} -DSERIAL_PORT_BOOT_PORTMUX={bootloader.portswap} -DUSING_OPTIBOOT
