@@ -5,17 +5,17 @@ extern void rtc_sleep_setup();
 
 void setup()
 {
-    Serial.begin(115200);
-    delay(512);
-    rtc_sleep_setup();
-    Serial.printf("start\n");
-    Serial.flush();
-    while(millis() < 3) ;
-    set_millis(0);
+  Serial.begin(115200);
+  delay(512);
+  rtc_sleep_setup();
+  Serial.printf("start\n");
+  Serial.flush();
+  while(millis() < 3) ;
+  set_millis(0);
 }
 
 void loop()
 {
-    rtc_sleep(311);
+  rtc_sleep(311);
 
 }
