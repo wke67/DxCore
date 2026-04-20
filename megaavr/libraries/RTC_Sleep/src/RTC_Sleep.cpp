@@ -40,8 +40,8 @@ ISR(RTC_CNT_vect) {
 static void rtc_sleep_setup() {
   // set up RTC with 32kHz crystal running at 1024 Hz
   _PROTECTED_WRITE(CLKCTRL_XOSC32KCTRLA, (CLKCTRL_RUNSTDBY_bm | CLKCTRL_ENABLE_bm | CLKCTRL_CSUT_16K_gc | CLKCTRL_LPMODE_bm)) ;
-  RTC_CTRLA=RTC_RUNSTDBY_bm | RTC_PRESCALER_DIV32_gc | RTC_RTCEN_bm;
-  RTC_CLKSEL=RTC_CLKSEL_XTAL32K_gc; // was 0x02
+  RTC_CTRLA = RTC_RUNSTDBY_bm | RTC_PRESCALER_DIV32_gc | RTC_RTCEN_bm;
+  RTC_CLKSEL = RTC_CLKSEL_XTAL32K_gc; // was 0x02
   while (!(CLKCTRL.MCLKSTATUS & CLKCTRL_XOSC32KS_bm)) ;
 
   // set up RTC period
@@ -107,13 +107,13 @@ void rtc_sleep(unsigned long dly) {
   #endif
 
   #ifndef MILLIS_USE_TIMERRTC
-  if ( startup ) {
+  if (startup) {
     rtc_sleep_setup();
     startup = 0;
   }
   #endif
 
-  dly = dly + (dly>>6) + (dly>>7) + (dly>>11) + (dly>>14); // ms -> 1024Hz
+  dly = dly + (dly >> 6) + (dly >> 7) + (dly >> 11) + (dly >> 14); // ms -> 1024Hz
   do {
     cnt = (dly > RTC_MAX) ? RTC_MAX : dly;
     dly =  dly - cnt;
