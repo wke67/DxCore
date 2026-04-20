@@ -84,8 +84,12 @@ AVR32EB14 AVR16EB14 */
         # # # ##### #    ####  #   #  ###
         #   # #   # #    # #   #   #     #
         #   # #   #  ### #  #   ###   ##*/
-#define digitalPinToAnalogInput(p)     (((p) >= PIN_PD4 && (p) <= PIN_PD7) ? (p) - PIN_PD0 : (((p) > PIN_PC0 && (p) <= PIN_PC3) ? (p) + 20 : NOT_A_PIN))
-#define analogChannelToDigitalPin(p)   (((p) <  8       && (p) > 3       ) ? (p) + PIN_PD0 : (((p) >= 28     || (p) <= 31)    ) ? (p) - 20 : NOT_A_PIN)
+#define digitalPinToAnalogInput(p)        (((p) >= PIN_PD4 && (p) <= PIN_PD7) ? (p) - PIN_PD0 : (((p) > PIN_PC0 && (p) <= PIN_PC3) ? (p) + 20 : NOT_A_PIN))
+#define analogChannelToDigitalPin(p)      ( (p) <  4 ? NOT_A_PIN           \
+                                          : (p) < 16 ? (p) +    + PIN_PD0  \
+                                          : (p) < 28 ? NOT_A_PIN           \
+                                          : (p) < 32 ? (p) - 28 + PIN_PC0  \
+                                          : NOT_A_PIN )
 #define analogInputToDigitalPin(p)                        analogChannelToDigitalPin((p) & 0x7F)
 #define digitalOrAnalogPinToDigital(p)    (((p) & 0x80) ? analogChannelToDigitalPin((p) & 0x7F) : digitalPinToBitMask(p) ? (p) : NOT_A_PIN)
 #define portToPinZero(port)               ((port) == PD ? PIN_PD0: ((port)== PC ? PIN_PC0 : ((port)== PA ? PIN_PA0 : NOT_A_PIN)))
@@ -112,7 +116,7 @@ AVR32EB14 AVR16EB14 */
 /* digitalPinHasPWM(p) is an evil compatibility function that lies to keep api compatibility.
 It must not be used if the PORTMUX options for the timers are or may have been changed, otherwise it will give incorrect results.
 
-digitalPinHasPWMNow() provides the information that you want when you call this function, however, digitalPinHasPWM() is compiletime
+digitalPinHasPWMNow() provides the information that you want when you call this function, however, digitalPinHasPWM() is compile time
 known and constant foldable - in many cases, this was relied upon by code in the wild... it's not an ideal situation.
 */
 

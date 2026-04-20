@@ -477,24 +477,54 @@ F     b7  f07 f17 | D1  MUX  7  |         f27 f37     E0F A07
 // that a value is a channel number not a pin number.
 #define ADC_CH(ch)                (0x80 | (ch))
 
-#if !defined(ADC0_TEMP2) // Dx-series
-  #if defined(DAC0)
-    #define ADC_DAC0          ADC_CH(ADC_MUXPOS_DAC0_gc)
-  #endif
-  #define ADC_DACREF0       ADC_CH(0x49)
-  #ifdef AC1 // Always either 1 AC or 3 until the Ex-series
-    #define ADC_DACREF1     ADC_CH(0x4A)
-  #endif
-  #ifdef AC2
-    #define ADC_DACREF2     ADC_CH(0x4B)
-  #endif
-  #define ADC_GROUND        ADC_CH(ADC_MUXPOS_GND_gc)
-  #define ADC_TEMPERATURE   ADC_CH(ADC_MUXPOS_TEMPSENSE_gc)
+#if defined(DAC0)
+  #define ADC_DAC0          ADC_CH(ADC_MUXPOS_DAC0_gc)
+#endif
+#define ADC_GROUND        ADC_CH(ADC_MUXPOS_GND_gc)    /* specified correctly everywhere!*/
+#define ADC_TEMPERATURE   ADC_CH(ADC_MUXPOS_TEMPSENSE_gc)  /* the value is either 0x30 or 0x40, but this works either way */
 
-  #ifdef MVIO
-    #define ADC_VDDDIV10    ADC_CH(ADC_MUXPOS_VDDDIV10_gc)
-    #define ADC_VDDIO2DIV10 ADC_CH(ADC_MUXPOS_VDDIO2DIV10_gc)
+#if defined(AC0)
+  // Some of the damned DA's are missing the groupcodes! *and you can't test for enums*
+  #if defined(__AVR_DA__)
+    #define ADC_DACREF0       ADC_CH(0x49)
+  #elif defined(__AVR_EA__) || defined(__AVR_EB__)
+    #define ADC_DACREF0       ADC_CH(0x39)
+  #else
+    #define ADC_DACREF0       ADC_CH(ADC_MUXPOS_DACREF0_gc)
   #endif
+#endif
+#if defined(AC1)
+  #if defined(__AVR_DA__)
+    #define ADC_DACREF1       ADC_CH(0x4A)
+  #elif defined(__AVR_EA__) || defined(__AVR_EB__)
+    #define ADC_DACREF1       ADC_CH(0x3A)
+  #else
+    #define ADC_DACREF1      ADC_CH(ADC_MUXPOS_DACREF1_gc)
+  #endif
+#endif
+#if defined(AC2)
+  #if defined(__AVR_DA__)
+    #define ADC_DACREF2       ADC_CH(0x4B)
+  #elif defined(__AVR_EA__) || defined(__AVR_EB__)
+    #define ADC_DACREF2       ADC_CH(0x3B)
+  #else
+    #define ADC_DACREF2     ADC_CH(ADC_MUXPOS_DACREF2_gc)
+  #endif
+#endif
+
+#ifdef MVIO
+  #define ADC_VDDDIV10    ADC_CH(ADC_MUXPOS_VDDDIV10_gc)        /* 44 */
+  #define ADC_VDDIO2DIV10 ADC_CH(ADC_MUXPOS_VDDIO2DIV10_gc)     /* 45*/
+#elif defined(__AVR_EA__) || defined(__AVR_EB__)
+  #define ADC_VDDDIV10    ADC_CH(0x31) /* They're probably ggoing to rename that constant */
+#elif defined(__AVR_DU__)
+  #define ADC_VDDDIV10    ADC_CH(ADC_MUXPOS_VDDDIV10_gc)
+#endif
+
+
+
+#if !defined(ADC0_TEMP2) // Dx-series
+
 
   /* end special channels, start options */
   #define ADC_ACC2                (0x81)
@@ -535,17 +565,6 @@ F     b7  f07 f17 | D1  MUX  7  |         f27 f37     E0F A07
   #define ADC_STANDBY_ON          (0xC0)
   #define ADC_STANDBY_OFF         (0x90)
 #else // Ex-series
-  #define ADC_TEMPERATURE   ADC_CH(ADC_MUXPOS_TEMPSENSE_gc)
-  #define ADC_GROUND        ADC_CH(ADC_MUXPOS_GND_gc)
-  #if defined(DAC0)
-    #define ADC_DAC0        ADC_CH(0x38)
-  #endif
-  #define ADC_DACREF0       ADC_CH(0x39)
-  #if defined(AC1) // Always either 1 AC or 3 until the Ex-series
-    #define ADC_DACREF1     ADC_CH(0x3A)
-  #endif
-
-  #define ADC_VDDDIV10     ADC_CH(ADC_MUXPOS_VDDDIV10_gc)
   //Accumulation
   #define ADC_ACC2                (0x81)
   #define ADC_ACC4                (0x82)
@@ -618,8 +637,8 @@ F     b7  f07 f17 | D1  MUX  7  |         f27 f37     E0F A07
 
 /*
 Supplied by Variant file:
-#define digitalPinToAnalogInput(p)      // Given digital pin (p), returns the analog channel number, or NOT_A_PIN if the pin does not suipport analog input.
-#define analogChannelToDigitalPin(p)    // Inverse of above. Given analog chanbel number (p) in raw form not ADC_CH() form, returns the digital pin number corresponding to it.
+#define digitalPinToAnalogInput(p)      // Given digital pin (p), returns the analog channel number, or NOT_A_PIN if the pin does not support analog input.
+#define analogChannelToDigitalPin(p)    // Inverse of above. Given analog channel number (p) in raw form not ADC_CH() form, returns the digital pin number corresponding to it.
 #define analogInputToDigitalPin(p)      // Similar to previous. Given analog input number (p) with the high bit set, returns the digital pin number corresponding to it)
 #define digitalOrAnalogPinToDigital(p)  // Given either an analog input number (with high bit set) or a digital pin number (without it set), returns the digital pin number.
 Yes, these are poorly named and do not use analog input, analog pin, and analog channel consistently. Unfortunately the names of some of these were set in stone by virtue of their being preexisting macros used in code in the wild.
