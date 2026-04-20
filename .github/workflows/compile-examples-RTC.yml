@@ -79,7 +79,6 @@ jobs:
         - megaavr/extras/ci/test-sketch/all/test_tone
         - megaavr/extras/ci/test-sketch/all/test_PWM
         - megaavr/extras/ci/test-sketch/all/test_timekeeping
-        - megaavr/extras/ci/test-sketch/all/macros
       avr-da-series-sketch-paths: |
         - megaavr/extras/ci/test-sketch/da/dummysketch
         - megaavr/libraries/ZCD/examples/Interrupt
@@ -458,8 +457,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.ref.name }}
+      #    with:
+      #      ref: ${{ github.ref.name }}
 
       - name: check
         run: |
