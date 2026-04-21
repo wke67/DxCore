@@ -13,7 +13,7 @@ class LowPowerClass {
     uint8_t _status;
 
   public:
-    LowPowerClass(uint8_t mode = LOWPOWER_EXT);
+    LowPowerClass(uint8_t mode = LOWPOWER_INT);
     uint8_t status() {
       return _status;
     }
