@@ -23,7 +23,7 @@ jobs:
         - megaavr/libraries/LowPower/examples/LowPower_ext
 
     strategy:
-      fail-fast: true
+      fail-fast: false
 
       matrix:
         flash-class:
