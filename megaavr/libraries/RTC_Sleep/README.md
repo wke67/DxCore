@@ -1,4 +1,4 @@
-## Low Power Sleep for AVR DxCore
+# Low Power Sleep for AVR DxCore
 
 AVR DxCore provides a low power 32 kHz crystal oscillator.
 The chip can be powered down to 'Standby' consuming ~1uA.
@@ -16,7 +16,7 @@ interrupt flags to __rtc_intflags. (DxCore update required!)
 If the RTC Timer is not used, the RTC XTAL oscillator is
 initialized on the first call to rtc_sleep() and the RTC
 interrput by this library.If a millis() timer is active
-the millis() function is updated but the time returned is 
+the millis() function is updated but the time returned is
 not correct to the ms. The rtc_millis_xx() functions will
 work also is timers are disabled in the Arduino IDE.
 
