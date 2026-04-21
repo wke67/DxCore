@@ -17,7 +17,9 @@ jobs:
 
       all-parts-sketch-paths: |
         - megaavr/extras/ci/test-sketch/all/dummysketch
-        - megaavr/extras/ci/test-sketch/all/LowPower
+        - megaavr/libraries/LowPower
+        - megaavr/libraries/RTC_Sleep
+
     strategy:
       fail-fast: false
 
