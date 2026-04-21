@@ -46,8 +46,8 @@ jobs:
           - y
           - 2
         bootloader-code:
-            -
-            - o
+          -
+          - o
 
         # Filter out these matrix combinations
         exclude:
@@ -119,30 +119,6 @@ jobs:
           - flash-class: 2
             bootloader-code: o
             available-flash-kB: 1.5
-
-      # Filter out these matrix combinations
-        exclude:
-          - flash-class: 32
-            peripheral-class: 0
-          - flash-class: 32
-            IO-class: 4
-          - flash-class: 32
-            IO-class: 2
-          - flash-class: 16
-            IO-class: 2
-          - flash-class: 8
-            IO-class: 2
-          - flash-class: 4
-            peripheral-class: 0
-            IO-class: 7
-          - flash-class: 2
-            IO-class: 7
-          - flash-class: 2
-            IO-class: 6
-          - flash-class: 2
-            peripheral-class: 2
-          - IO-class: 2
-            peripheral-class: 2
 
     steps:
       - name: Checkout repository
