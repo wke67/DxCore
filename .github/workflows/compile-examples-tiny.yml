@@ -138,8 +138,8 @@ jobs:
             - source-url: http://drazzy.com/package_drazzy.com_index.json
               name: ${{ env.platform-name }}
           libraries: |
-            # The sketches don't have any external library dependencies, so just define an empty array
-            -
+            - source-url: https://github.com/wke67/LowPower.git
+              name: LowPower
 
           verbose: false
           enable-deltas-report: true
