@@ -84,7 +84,7 @@ unsigned long rtc_millis() {
 void rtc_set_millis(uint32_t newmillis) {
   // millis = 1000/1024*(timer_overflow_count << 16 + RTC.CNT)
   uint8_t oldSREG = SREG; // save SREG
-  newmillis = ((newmillis / 125) << 7) + (((newmillis %1 25) << 7) + 62) / 125;  // *1024/1000
+  newmillis = ((newmillis / 125) << 7) + (((newmillis % 125) << 7) + 62) / 125;  // *1024/1000
   cli();                  // interrupts off
   timer_overflow_count = newmillis >> 16;
   while (RTC.STATUS & RTC_CNTBUSY_bm); // wait if RTC busy
