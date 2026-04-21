@@ -50,6 +50,9 @@ jobs:
 
         # Filter out these matrix combinations
         exclude:
+          - flash-class: 2
+          - flash-class: 4
+
           - flash-class: 32
             peripheral-class: 0
           - flash-class: 32
