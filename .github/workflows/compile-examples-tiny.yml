@@ -42,8 +42,85 @@ jobs:
           - 6
           - 4
           - 2
+        bootloader-series:
+          - y
+          - 2
+        bootloader-code:
+            -
+            - o
 
         # Filter out these matrix combinations
+        exclude:
+          - flash-class: 32
+            peripheral-class: 0
+          - flash-class: 32
+            IO-class: 4
+          - flash-class: 32
+            IO-class: 2
+          - flash-class: 16
+            IO-class: 2
+          - flash-class: 8
+            IO-class: 2
+          - flash-class: 4
+            peripheral-class: 0
+            IO-class: 7
+          - flash-class: 2
+            IO-class: 7
+          - flash-class: 2
+            IO-class: 6
+          - flash-class: 2
+            peripheral-class: 2
+          - IO-class: 2
+            peripheral-class: 2
+          - peripheral-class: 2
+            bootloader-code: o
+            bootloader-series: y
+          - peripheral-class: 2
+            bootloader-code:
+            bootloader-series: 2
+          - peripheral-class: 1
+            bootloader-series: 2
+          - peripheral-class: 0
+            bootloader-series: 2
+
+        include:
+          - flash-class: 32
+            bootloader-code:
+            available-flash-kB: 32
+            bootloader-series: y
+          - flash-class: 32
+            bootloader-code: o
+            available-flash-kB: 31.5
+          - flash-class: 16
+            bootloader-code:
+            available-flash-kB: 16
+            bootloader-series: y
+          - flash-class: 16
+            bootloader-code: o
+            available-flash-kB: 15.5
+          - flash-class: 8
+            bootloader-code:
+            available-flash-kB: 8
+            bootloader-series: y
+          - flash-class: 8
+            bootloader-code: o
+            available-flash-kB: 7.5
+          - flash-class: 4
+            bootloader-code:
+            available-flash-kB: 4
+            bootloader-series: y
+          - flash-class: 4
+            bootloader-code: o
+            available-flash-kB: 3.5
+          - flash-class: 2
+            bootloader-code:
+            available-flash-kB: 2
+            bootloader-series: y
+          - flash-class: 2
+            bootloader-code: o
+            available-flash-kB: 1.5
+
+      # Filter out these matrix combinations
         exclude:
           - flash-class: 32
             peripheral-class: 0
@@ -77,7 +154,7 @@ jobs:
         uses: arduino/compile-sketches@main
         with:
           cli-version: 0.33.0
-          fqbn: ${{ env.platform-name }}:atx${{ matrix.IO-class }}:chip=${{ matrix.flash-class }}${{ matrix.peripheral-class }}${{ matrix.IO-class }},clock=20internal,wiremode=mors,attach=allenabled,PWMmux=default
+          fqbn: ${{ env.platform-name }}:atx${{ matrix.bootloader-series}}${{ matrix.IO-class }}${{ matrix.bootloader-code }}:chip=${{ matrix.flash-class }}${{ matrix.peripheral-class }}${{ matrix.IO-class }},clock${{ matrix.bootloader-code }}=20internal,wiremode=mors,attach=allenabled,PWMmux=default
           sketch-paths: |
             ${{ env.all-parts-sketch-paths }}
           platforms: |
