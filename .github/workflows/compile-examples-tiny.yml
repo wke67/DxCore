@@ -21,7 +21,6 @@ jobs:
         - megaavr/libraries/LowPower/examples/LowPower_xtal
         - megaavr/libraries/LowPower/examples/LowPower_int
         - megaavr/libraries/LowPower/examples/LowPower_ext
-        - megaavr/libraries/RTC_Sleep/examples/RTC_Check
 
     strategy:
       fail-fast: true
