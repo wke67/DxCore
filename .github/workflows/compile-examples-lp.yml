@@ -17,8 +17,11 @@ jobs:
 
       all-parts-sketch-paths: |
         - megaavr/extras/ci/test-sketch/all/dummysketch
-        - megaavr/libraries/LowPower
-        - megaavr/libraries/RTC_Sleep
+        - megaavr/libraries/LowPower/examples/LowPower
+        - megaavr/libraries/LowPower/examples/LowPower_xtal
+        - megaavr/libraries/LowPower/examples/LowPower_int
+        - megaavr/libraries/LowPower/examples/LowPower_ext
+        - megaavr/libraries/RTC_Sleep/examples/RTC_Check
 
     strategy:
       fail-fast: false
@@ -70,6 +73,8 @@ jobs:
           - overclock-osc: 48
           - clocksource: extclock
           - clocksource: cystal
+          - pincount: 64
+          - pincount: 48
 
           # Filter one flash-class per package
           - flash-class: 16
@@ -214,7 +219,7 @@ jobs:
           enable-warnings-report: false
           sketches-report-path: sketches-reports
 
-      - name: Compile examples (millis default)
+      - name: Compile examples (millis none)
         if: matrix.millis == 'default'
         uses: arduino/compile-sketches@main
         with:
