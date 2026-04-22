@@ -7,10 +7,10 @@ To allow DxCore development using Arduino IDE and arduino-cli on a Linux system 
 - in that folder clone the *DxCore* repository
 - copy *~/.arduino15/packages/DxCore/hardware/megaavr/\<latest\>/installed.json* to the *DxCore* repository *megaavr* folder
 - remove *~/.arduino15/packages/DxCore/megaavr/\<latest\>* directory
-- in *~/.arduino15/packages/DxCore/megaavr* create a symbolc link named *\<latest\>* to the repository *DxCore/megaavr* folder
+- in *~/.arduino15/packages/DxCore/megaavr* create a symbolic link named *\<latest\>* to the repository *DxCore/megaavr* folder
 
-Hints: the sketchbook folder can be found by looking at File->Preferences in the Arduino IDE menu  
-Here is what this looks like:  
+Hints: the sketchbook folder can be found by looking at File->Preferences in the Arduino IDE menu<br />
+Here is what this looks like:<br />
 ```shell
 cd ~
 mkdir Arduino/sketchbook/hardware

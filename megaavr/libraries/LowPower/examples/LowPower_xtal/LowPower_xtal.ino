@@ -30,7 +30,7 @@ void loop() {
   Serial.flush();
 }
 #else
-  #warning "xtal not available"
-  void setup() {};
-  void loop() {};
+#warning "xtal not available"
+void setup() {};
+void loop() {};
 #endif

@@ -2,7 +2,7 @@
 #define LOWPOWER_H
 
 #ifdef CLKCTRL_XOSC32KS_bm
-#define LOWPOWER_XTAL CLKCTRL_XOSC32KS_bm
+  #define LOWPOWER_XTAL CLKCTRL_XOSC32KS_bm
 #endif
 #define LOWPOWER_EXT  CLKCTRL_EXTS_bm
 #define LOWPOWER_INT  CLKCTRL_OSC32KS_bm
@@ -14,7 +14,9 @@ class LowPowerClass {
 
   public:
     LowPowerClass(uint8_t mode);
-    LowPowerClass() { LowPowerClass(LOWPOWER_INT); }
+    LowPowerClass() {
+      LowPowerClass(LOWPOWER_INT);
+    }
     uint8_t status() {
       return _status;
     }

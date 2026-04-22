@@ -10,7 +10,7 @@ in DxCore/../cores/.../wiring.c which needs to store the
 interrupt flags to __rtc_intflags.
 
 If the RTC Timer is not used, the RTC XTAL oscillator is
-initialized and the RTC interrput is handeled here.
+initialized and the RTC interrupt is handled here.
 The millis() function is updated but returned time is not
 correct to the ms.
 
@@ -57,7 +57,7 @@ LowPowerClass::LowPowerClass(uint8_t mode) {
       RTC_CLKSEL = RTC_CLKSEL_XTAL32K_gc; // RTC_CLKSEL_XOSC32K_gc == 2
       _status = timeout(CLKCTRL_XOSC32KS_bm);
       break;
-      #endif
+    #endif
 
     case LOWPOWER_EXT:
       RTC_CLKSEL = RTC_CLKSEL_EXTCLK_gc;
@@ -84,7 +84,7 @@ LowPowerClass::LowPowerClass(uint8_t mode) {
   RTC.CNT = 0;
   timer_overflow_count = 0;
 
-  // RTC Interrup enable
+  // RTC Interrupt enable
   RTC_INTCTRL = RTC_OVF_bm;
 
 }
@@ -137,7 +137,7 @@ void LowPowerClass::set_millis(uint32_t newmillis) {
   timer_overflow_count = newmillis >> 16;
   while (RTC.STATUS & RTC_CNTBUSY_bm); // wait if RTC busy
   RTC.CNT = newmillis & 0xFFFF;
-  SREG = oldSREG; // reenable interrupts if we killed them,
+  SREG = oldSREG; // re-enable interrupts if we killed them,
 }
 
 void LowPowerClass::restart_millis() {
