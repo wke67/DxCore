@@ -1,4 +1,4 @@
-## Installation for Development using Arduino IDE on Linux
+# Installation for Development using Arduino IDE on Linux
 
 To allow DxCore development using Arduino IDE and arduino-cli on a Linux system (e.g. Debian 13.4 trixie, ArchLinux), you can follow these steps:
 - install DxCore \<latest\> e.g. 1.6.2 from Arduino IDE
@@ -11,7 +11,7 @@ To allow DxCore development using Arduino IDE and arduino-cli on a Linux system 
 
 Hints: the sketchbook folder can be found by looking at File->Preferences in the Arduino IDE menu  
 Here is what this looks like:  
-```
+```shell
 cd ~
 mkdir Arduino/sketchbook/hardware
 cd Arduino/sketchbook/hardware

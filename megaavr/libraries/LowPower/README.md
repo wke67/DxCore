@@ -3,7 +3,7 @@
 Low power timed-sleep() for Microchip AVR chips which include the RTC module and run on Arduino DxCore, e.g. avr64dd32 or MegaTinyCore e.g. ATtiny1604.
 
 The RTC module can run with internal, external or on-chip 32kHz Crystal oscillator clocks.
-The chip can be powered down to 'Standby' consuming ~1uA. In this mode, almost all 
+The chip can be powered down to 'Standby' consuming ~1uA. In this mode, almost all
 peripherals are at rest including timers. The time-keeping can be done by the RTC Clock, this
 can be available from the Arduino IDE millis() timer menu.
 
