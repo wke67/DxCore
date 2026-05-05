@@ -12,12 +12,12 @@ Available pins for Dx and Ex have been unchanging. Inputs are always
 
 |Logic Block |  IN0-2  | OUT | ALT OUT | Availability  | Notes:
 |------------|---------|-----|---------|---------------|-----------------------------
-|Logic0      | PA0-PA2 | PA3 |     PA6 |    All parts  |
-|Logic1      | PC0-PC2 | PC3 |     PC6 |    All parts  |
+|Logic0      | PA0-PA2 | PA3 |     PA6 |    All parts  | .
+|Logic1      | PC0-PC2 | PC3 |     PC6 |    All parts  | .
 |Logic2      | PD0-PD2 | PD3 |     PD6 |    All parts  | There is no PD0, hence no input 0 on any DD, 28 pin DB, or 32-pin DB
 |Logic3      | PF0-PF2 | PF3 |     --- |    All parts  | Link input broken on many 32/28 pin DA/DB parts
-|Logic4      | PB0-PB2 | PB3 |     PB6 | 48+ pin DA/DB |
-|Logic5      | PG0-PG2 | PG3 |     PG6 | 48+ pin DA/DB |
+|Logic4      | PB0-PB2 | PB3 |     PB6 | 48+ pin DA/DB | .
+|Logic5      | PG0-PG2 | PG3 |     PG6 | 48+ pin DA/DB | .
 
 
 
@@ -36,20 +36,12 @@ Available pins for Dx and Ex have been unchanging. Inputs are always
 |Logic5       | Present in AVR DA/DB parts with at least 48 pins, pins only present on 64-pin parts.                        |
 
 
-## Notes on other new parts:
+## Notes on other new parts
 The DU has only PC3 out of the entire port C left, the rest having been given over to USB. This obviously takes out the inputs for LUT1.
 Notice how logic block 2 and 3 on 14/20 pin DD and logic block 5 on 48-pin parts have no dedicated pins. If you are not using pin input or output, use these logic blocks to conserve the more useful ones when not precluded by other considerations.
 
-### The EVSYS has changed in ways most likely to be relevant to people using the CCL in the DU EA, EB, and presumably all future parts.
-Two high visibility event system features got big changes. See the [Event](../Event/Readme.md) library for more detail.
-
-Previously, event channels were not equal: channels 0 and 1 could take event input from port A/B, 3 and 4 from C/D etcetera (the tiny2 did the obvious thing and linked them in a circle).
-
-Now, each port has an EVGENCTRLA, which takes the form 0bAaaaBbbb where A and B enable event 0 and 1 respectively, and aaa and bbb are the number of the pin generating this event.
-
-The same was done with the RTC event generator channels ,
-
-
+### The EVSYS changed between DD and EA
+EVSYS is closely associated with the CCL, and the change is significant enough that you do need to take account of it. If you're using the event system, be sure to read the Event library documentation and/or the datasheet. Two high visibility event system features got big changes. See the [Event](../Event/Readme.md) library for more detail. Now finally the dream is achieved - all event channels are created equal now, which is a terrific improvement in developer experience.
 
 
 ## Pin availability and Quick Reference (tinyAVR)
@@ -85,7 +77,7 @@ Logic3 OUT  | Not present   | Only alt out  | Only alt out  | Yes, both     |
 
 
 ### Invelid/reserved options
-Note that there exist reserved and invalid values for many of the bitfields controlled by the properties of the logic block, as well as reserved bits with no known or documented function. This library does not support specifying these. No comprehensive investigation has been undertaken to exclude the existence of of hidden and/or broken features, nor is there any reason to expect that such exist
+Note that there exist reserved and invalid values for many of the bitfields controlled by the properties of the logic block, as well as reserved bits with no known or documented function. This library does not support specifying these. ~No comprehensive investigation has been undertaken to exclude the existence of of hidden and/or broken features, nor is there any reason to expect that such exist.~ Picking invalid options just makes the CCL stop working.
 
 *A discovery of an undocumented or reserved option which has been found to do something potentially useful gives the usual (or it would be usual, except that there are essen) reward for undocumented features: an assembled breakout board featuring an impacted part (of your choice), or a quantity of bare boards of your choice from my [tindie store](https://tindie.com/stores/drazzy) of equal value.* See details at [https://github/SpenceKonde/AVR_Research/blob/master/Bounties.md](https://github.com/SpenceKonde/AVR_Research/blob/main/Bounties.md)
 
