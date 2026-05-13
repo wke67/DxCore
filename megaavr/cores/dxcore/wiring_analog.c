@@ -627,7 +627,7 @@ inline __attribute__((always_inline)) void check_valid_resolution(uint8_t res) {
   inline int32_t analogReadDiff(uint8_t pos, uint8_t neg, uint8_t res, uint8_t gain) {
     check_valid_enh_res(res);
     check_valid_analog_pin(pos);
-    check_valid_negative_pin(neg);
+    check_valid_analog_pin(neg);
     if (__builtin_constant_p(gain)) {
       if (gain != 0 && gain != 1 && gain != 2 && gain != 4 && gain != 8 && gain != 16){
         badArg("The requested gain is not available on this part, accepted values are 0, 1, 2, 4, 8 and 16.");
@@ -1268,11 +1268,3 @@ inline __attribute__((always_inline)) void check_valid_resolution(uint8_t res) {
  ##       ##  #### ##     ##    ######### ##     ## ##
  ##       ##   ### ##     ##    ##     ## ##     ## ##    ##
  ######## ##    ## ########     ##     ## ########   #####*/
-
-
-
-
-
-
-
-
