@@ -6,8 +6,10 @@
 # As ioavrxxYYzz.h appears to be generated, the comment lines of the USART PORTMUX are a reliable source for the USART pin mapping.
 # The optiboot_dx.c relies on the azduino avr-gcc compiler, other compiler versions always require using the frame Pointer and won't compile.
 
-TOOLS=~/.arduino15/packages/DxCore/tools/avr-gcc/7.3.0-atmel3.6.1-azduino8a
-INCLUDES=${TOOLS}/avr/include/avr
+INCROOT=${INCROOT:-~/.arduino15/packages/DxCore/tools/avr-gcc/7.3.0-atmel3.6.1-azduino8}
+INCLUDES=${INCROOT}/avr/include/avr
+
+if [ ! -d ${INCLUDES} ]; then echo path to include files: ${INCLUDES} not found. export INCROOT=path in environment; exit 1; fi
 
 if [ $# -eq 0 ]; then
   echo usage:   $0  "MCU  LED_PIN  #LED_toggles  UART_TX_PIN  BAUDRATE"

@@ -330,10 +330,19 @@ typedef union {
 // like this: register USART_t* _usart asm ("r28");
 // on the global scope.
 #if defined (ASM_UART)
-#define GET_UART_STATUS(__localVar__) __asm__ __volatile__("ldd  %A0, Y+4" "\n\t":   "=r" (__localVar__) : );
-#define GET_UART_FLAGS(__localVar__)  __asm__ __volatile__("ldd  %A0, Y+1" "\n\t":   "=r" (__localVar__) : );
-#define GET_UART_DATA(__localVar__)   __asm__ __volatile__("ldd  %A0, Y+0" "\n\t":   "=r" (__localVar__) : );
-#define SET_UART_DATA(__localVar__)   __asm__ __volatile__("std  Y+2, %A0" "\n\t": :  "r" (__localVar__)   );
+#define GET_UART(__var__, __offset__) \
+  __asm__ __volatile__("ldd  %0, Y+%1  \n\t" \
+  : "=r" (__var__) : "n" (__builtin_offsetof (USART_t, __offset__)) \
+)
+#define SET_UART(__var__, __offset__) __asm__ __volatile__( \
+  "std  Y+%1, %0  \n\t"  \
+  :: "r" ((uint8_t)(__var__)), "n" (__builtin_offsetof (USART_t, __offset__)) \
+)
+static uint8_t inline __attribute__((always_inline)) get_uart_status() {
+  uint8_t s;
+  GET_UART(s, STATUS);
+  return s;
+}
 #endif
 
 #if defined(ASM_COPY) && defined(ASM_UART)
@@ -495,7 +504,7 @@ register  uint8_t flash_clr asm("r2");   // load flash at 0x200 and add 1. if ==
 register addr16_t buff asm("r20");      // will require only a movw instead of two ldi
 register addr16_t address asm("r14");   // set by avrdude, reg has to be mov'd anyway
 
-
+register uint8_t desttype asm("r16");
 
 /* main program starts here */
 int main (void) {
@@ -576,8 +585,9 @@ int main (void) {
     // thus this call is unnecessary! Save 2 instruction words!
     // watchdogConfig(WDT_PERIOD_OFF_gc);
     __asm__ __volatile__ (
-      "jmp 0x200\n"         // could be replaced by rjump, as this is pretty much fixed
+      "rjmp 0x200\n"         // could be replaced by rjump, as this is pretty much fixed
     );
+    __builtin_unreachable();
   } // end of jumping to app
 
   // We don't have to load the lower byte, save a word.
@@ -637,15 +647,15 @@ int main (void) {
 
   #if defined (ASM_UART)
     #if (BAUD_SETTING_4 < 256)
-      _usart->BAUDL = BAUD_SETTING_4;
+      SET_UART(BAUD_SETTING_4, BAUDL);
     #else
-      _usart->BAUDL = (BAUD_SETTING_4 & 0xFF);
-      _usart->BAUDH = (BAUD_SETTING_4 >> 8);
+      SET_UART(BAUD_SETTING_4 & 0xff, BAUDL);
+      SET_UART(BAUD_SETTING_4 >> 8, BAUDH);
     #endif
       //_usart->DBGCTRL = 1;  // run during debug
-      _usart->CTRLC = (USART_CHSIZE_gm & USART_CHSIZE_8BIT_gc);  // Async, Parity Disabled, 1 StopBit
+      SET_UART(USART_CHSIZE_gm & USART_CHSIZE_8BIT_gc, CTRLC);
       //_usart->CTRLA = 0;  // Interrupts: all off - Unnecessary! We ensured that the chip was freshly reset so this is already 0.
-      _usart->CTRLB = USART_RXEN_bm | USART_TXEN_bm;
+      SET_UART(USART_RXEN_bm | USART_TXEN_bm, CTRLB);
   #else
     #if (BAUD_SETTING_4 < 256)
       MYUART.BAUDL = BAUD_SETTING_4;
@@ -759,7 +769,7 @@ int main (void) {
     } else if ((ch & 0xEF) == STK_PROG_PAGE) {   // 0xEF == ~0x10 == 0x74-0x64
       pagelen_t length;
       GETLENGTH(length);
-      uint8_t desttype = getch();
+      desttype = getch();
 
       if (ch & 0x10) {  // = 0x74 == STK_READ_PAGE
         verifySpace();
@@ -827,11 +837,9 @@ static inline void write_nCh(uint8_t* src, pagelen_t count) {
 void putch (char ch) {
   #if defined(ASM_UART)
     while (1) {
-     uint8_t status;
-     GET_UART_STATUS(status);
-     if (status & USART_DREIF_bm) break;
+      if ( get_uart_status() & USART_DREIF_bm) break;
     }
-    SET_UART_DATA(ch);
+    SET_UART(ch, TXDATAL);
   #else
     while (0 == (MYUART.STATUS & USART_DREIF_bm))
       ;
@@ -846,11 +854,9 @@ uint8_t getch (void) {
   uint8_t ch;
   #if defined(ASM_UART)
     while (1) {
-      uint8_t status;
-      GET_UART_STATUS(status);
-      if (status & USART_RXCIF_bm) break;
+      if ( get_uart_status() & USART_RXCIF_bm) break;
     }
-    GET_UART_DATA(ch);  // low byte has to be read first
+    GET_UART(ch, RXDATAL);  // low byte has to be read first
     asm __volatile__(             // This asm saves a word
       "ldd  r25, Y+1"     "\n\t"  // as otherwise we would
       "sbrs r25, %[bp]"   "\n\t"  // get a sbrs, rjmp+2, wdr
@@ -914,7 +920,7 @@ void verifySpace () {
 
       for(uint16_t delay = 0; delay < LED_DELAY; delay++) {
         watchdogReset();
-        if (_usart->STATUS & USART_RXCIF_bm) {
+        if ( get_uart_status() & USART_RXCIF_bm) {
           break;
         }
       }
