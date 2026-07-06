@@ -2,8 +2,8 @@
 # The flash target assumes boot pagesize is 512 for all Dx Cores and 256 for all Ex Cores.
 # avrdude >= 8.1 required
 
-GCCROOT=~/.arduino15/packages/DxCore/tools/avr-gcc/7.3.0-atmel3.6.1-azduino8a
-AVRDUDE=~/.arduino15/packages/DxCore/tools/avrdude/avrdude_v8.1_Linux_64bit/avrdude_Linux_64bit/bin/avrdude
+GCCROOT=~/.arduino15/packages/DxCore/tools/avr-gcc/7.3.0-atmel3.6.1-azduino8
+AVRDUDE=~/.arduino15/packages/DxCore/tools/avrdude/avrdude_v8.1-released/bin/avrdude
 
 CC=$(GCCROOT)/bin/avr-gcc
 SIZE=$(GCCROOT)/bin/avr-size
