@@ -19,6 +19,14 @@ serialupdi57k.program.protocol=uart
 serialupdi57k.program.tool=serialupdi
 serialupdi57k.bootloader.tool=serialupdi
 
+serialupdi.name=avrdude serialupdi
+serialupdi.communication=serial
+serialupdi.protocol=serialupdi
+serialupdi.program.protocol=serialupdi
+serialupdi.program.tool=avrdude
+serialupdi.program.extra_params=-P/dev/ttyUPDI -b{program.speed}
+serialupdi.program.speed=115200
+
 jtag2updi.name=JTAGv2 to UPDI bridge (jtag2updi)
 jtag2updi.communication=serial
 jtag2updi.protocol=jtag2updi
