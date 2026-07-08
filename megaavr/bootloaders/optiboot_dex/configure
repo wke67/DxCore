@@ -51,7 +51,7 @@ PORTMUX=$(sed -n -e "/${PORTMUX}/s/.*= (\(0x.*\)).*/\1/p" ${INCLUDES}/${HEADER} 
 
 TX_PORT=$(echo $TX | sed -e 's/P\([A-F]\).*/PORT\1/')
 TX_PIN=$(echo $TX | sed -e 's/P[A-F]\([0-9]\)/\1/')
-UART_NUM=$(echo $UART | sed -e 's/[a-Z]\+//')
+UART_NUM=$(echo $UART | sed -e 's/[A-z]\+//')
 
 if [ ${UART_NUM} -gt 3 ]; then
   PMREG=USARTROUTEB
