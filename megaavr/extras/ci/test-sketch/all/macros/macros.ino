@@ -15,6 +15,10 @@ void setup() {
     i+=analogChannelToDigitalPin(p);
   }
 
+  #if defined(USING_OPTIBOOT) && !defined(ASSUME_MVIO_FUSE)  // optiboot case is using non constant expressions!
+    #define IS_MVIO_ENABLED() 0
+  #endif
+
   #if !defined(IS_MVIO_ENABLED)
     #define IS_MVIO_ENABLED() 0
   #endif
