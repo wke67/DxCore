@@ -463,8 +463,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-        with:
-          ref: analogRead
+  
           
       # See: https://github.com/arduino/compile-sketches/README.md
 
