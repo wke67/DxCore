@@ -19,7 +19,7 @@ serialupdi57k.program.protocol=uart
 serialupdi57k.program.tool=serialupdi
 serialupdi57k.bootloader.tool=serialupdi
 
-dudeserialupdi.name=avrdude serialupdi
+dudeserialupdi.name=avrdude serialupdi (on /dev/ttyUPDI)
 dudeserialupdi.communication=serial
 dudeserialupdi.protocol=serialupdi
 dudeserialupdi.program.protocol=serialupdi
