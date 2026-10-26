@@ -202,7 +202,8 @@ tools.avrdude.upload.network_pattern="{network_cmd}" -address {serial.port} -por
 # and the #REMOVE#, leaving the correct path.                #
 ##############################################################
 
-tools.serialupdi.cmd={runtime.platform.path}/tools/python3/python3
+#tools.serialupdi.cmd={runtime.platform.path}/tools/python3/python3
+tools.serialupdi.cmd=python3
 #REMOVE#tools.serialupdi.cmd={runtime.tools.python3.path}/python3
 
 ## Unused Parameters.

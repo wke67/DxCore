@@ -4786,9 +4786,9 @@ avreaopti.bootloader.SYSCFG0=0b110{bootloader.updipinbit}{bootloader.resetpinbit
 avreaopti.bootloader.CODESIZE=0x00
 #avreaopti.bootloader.BOOTSIZE=0x02 # dummy overwritten by spm
 avreaopti.bootloader.avrdudestring=-Uflash:w:{bootloader.file}:i
-avreaopti.bootloader.pymcuprogstring=-aerase
+avreaopti.bootloader.pymcuprogstring=-f "{bootloader.file}" -a write
 avreaopti.bootloader.avrdudefuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
-avreaopti.bootloader.supdidudefuse5=5:{bootloader.SYSCFG0}
+avreaopti.bootloader.serupdifuse5=5:{bootloader.SYSCFG0}
 
 #----------------------------------------#
 # Upload parameters for Optiboot         #
