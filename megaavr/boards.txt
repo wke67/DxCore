@@ -4774,6 +4774,7 @@ avreaopti.build.millistimer=B2
 # Bootloading parameters and fuses       #
 #________________________________________#
 avreaopti.bootloader.tool=avrdude
+avreaopti.bootloader.file={runtime.platform.path}/bootloaders/optiboot_dex/hex/{bootloader.class}{bootloader.port}{bootloader.entrycond}.hex
 avreaopti.bootloader.WDTCFG=0b{bootloader.wdtwindowbits}{bootloader.wdttimeoutbits}
 # AVR Ex-series can only take either 0 (20 MHz) or 8 (16 MHz). overridden when 16 MHz used.
 avreaopti.bootloader.oschffrq=0
@@ -4783,8 +4784,8 @@ avreaopti.bootloader.wdttimeotbits=0000
 avreaopti.bootloader.BODCFG=0b{bootloader.bodlevbits}{bootloader.bodmodebits}
 avreaopti.bootloader.SYSCFG0=0b110{bootloader.updipinbit}{bootloader.resetpinbit}00{bootloader.eesavebit}
 avreaopti.bootloader.CODESIZE=0x00
-avreaopti.bootloader.BOOTSIZE=0x02
-avreaopti.bootloader.avrdudestring=
+#avreaopti.bootloader.BOOTSIZE=0x02 # dummy overwritten by spm
+avreaopti.bootloader.avrdudestring=-Uflash:w:{bootloader.file}:i
 avreaopti.bootloader.pymcuprogstring=-aerase
 avreaopti.bootloader.avrdudefuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
 avreaopti.bootloader.supdidudefuse5=5:{bootloader.SYSCFG0}
@@ -4821,46 +4822,63 @@ avreaopti.menu.chip.avr64ea28.build.mcu=avr64ea28
 avreaopti.menu.chip.avr64ea28.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea28.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea28.build.variant=28pin-easeries
+avreaopti.menu.chip.avr64ea28.bootloader.class=optiboot_64ex
+
 avreaopti.menu.chip.avr64ea32=AVR64EA32
 avreaopti.menu.chip.avr64ea32.build.mcu=avr64ea32
 avreaopti.menu.chip.avr64ea32.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea32.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea32.build.variant=32pin-easeries
+avreaopti.menu.chip.avr64ea32.bootloader.class=optiboot_64ex
+
 avreaopti.menu.chip.avr64ea48=AVR64EA48
 avreaopti.menu.chip.avr64ea48.build.mcu=avr64ea48
 avreaopti.menu.chip.avr64ea48.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea48.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea48.build.variant=48pin-easeries
+avreaopti.menu.chip.avr64ea48.bootloader.class=optiboot_64ex
+
 avreaopti.menu.chip.avr32ea28=AVR32EA28
 avreaopti.menu.chip.avr32ea28.build.mcu=avr32ea28
 avreaopti.menu.chip.avr32ea28.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea28.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea28.build.variant=28pin-easeries
+avreaopti.menu.chip.avr32ea28.bootloader.class=optiboot_32ex
+
 avreaopti.menu.chip.avr32ea32=AVR32EA32
 avreaopti.menu.chip.avr32ea32.build.mcu=avr32ea32
 avreaopti.menu.chip.avr32ea32.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea32.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea32.build.variant=32pin-easeries
+avreaopti.menu.chip.avr32ea32.bootloader.class=optiboot_32ex
+
 avreaopti.menu.chip.avr32ea48=AVR32EA48
 avreaopti.menu.chip.avr32ea48.build.mcu=avr32ea48
 avreaopti.menu.chip.avr32ea48.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea48.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea48.build.variant=48pin-easeries
+avreaopti.menu.chip.avr32ea48.bootloader.class=optiboot_32ex
+
 avreaopti.menu.chip.avr16ea28=AVR16EA28
 avreaopti.menu.chip.avr16ea28.build.mcu=avr16ea28
 avreaopti.menu.chip.avr16ea28.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea28.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea28.build.variant=28pin-easeries
+avreaopti.menu.chip.avr16ea28.bootloader.class=optiboot_16ex
+
 avreaopti.menu.chip.avr16ea32=AVR16EA32
 avreaopti.menu.chip.avr16ea32.build.mcu=avr16ea32
 avreaopti.menu.chip.avr16ea32.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea32.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea32.build.variant=32pin-easeries
+avreaopti.menu.chip.avr16ea32.bootloader.class=optiboot_16ex
+
 avreaopti.menu.chip.avr16ea48=AVR16EA48
 avreaopti.menu.chip.avr16ea48.build.mcu=avr16ea48
 avreaopti.menu.chip.avr16ea48.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea48.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea48.build.variant=48pin-easeries
+avreaopti.menu.chip.avr16ea48.bootloader.class=optiboot_16ex
 
 #----------------------------------------#
 # Clock speed and source options         #
@@ -5007,18 +5025,22 @@ avreaopti.menu.eesave.disable.bootloader.eesavebit=0
 #----------------------------------------#
 # Reset pin as INPUT, UPDI as I/O        #
 #________________________________________#
-avreaopti.menu.resetupdipins.resetupdi=PF6: Reset & PF7: UPDI (typical and recommended)
-avreaopti.menu.resetupdipins.resetupdi.bootloader.resetpinbit=1
-avreaopti.menu.resetupdipins.resetupdi.bootloader.updipinbit=1
-avreaopti.menu.resetupdipins.inputupdi=PF6: Input & PF7: UPDI (no challenges)
-avreaopti.menu.resetupdipins.inputupdi.bootloader.resetpinbit=0
-avreaopti.menu.resetupdipins.inputupdi.bootloader.updipinbit=1
-avreaopti.menu.resetupdipins.resetgpio=PF6: Reset & PF7: GPIO (Danger! HV required)
-avreaopti.menu.resetupdipins.resetgpio.bootloader.resetpinbit=1
-avreaopti.menu.resetupdipins.resetgpio.bootloader.updipinbit=0
-avreaopti.menu.resetupdipins.inputgpio=PF6: Input & PF7: GPIO (Danger! HV required)
-avreaopti.menu.resetupdipins.inputgpio.bootloader.resetpinbit=0
-avreaopti.menu.resetupdipins.inputgpio.bootloader.updipinbit=0
+avreaopti.menu.resetupdipinsopti.resetupdi=PF6: Reset & PF7: UPDI (typical and recommended)
+avreaopti.menu.resetupdipinsopti.resetupdi.bootloader.defaultentrycond=_extr
+avreaopti.menu.resetupdipinsopti.resetupdi.bootloader.resetpinbit=1
+avreaopti.menu.resetupdipinsopti.resetupdi.bootloader.updipinbit=1
+avreaopti.menu.resetupdipinsopti.inputupdi=PF6: Input & PF7: UPDI (no challenges)
+avreaopti.menu.resetupdipinsopti.inputupdi.bootloader.defaultentrycond=_all_8sec
+avreaopti.menu.resetupdipinsopti.inputupdi.bootloader.resetpinbit=0
+avreaopti.menu.resetupdipinsopti.inputupdi.bootloader.updipinbit=1
+avreaopti.menu.resetupdipinsopti.resetgpio=PF6: Reset & PF7: GPIO (Danger! HV required)
+avreaopti.menu.resetupdipinsopti.resetupdi.bootloader.defaultentrycond=_extr
+avreaopti.menu.resetupdipinsopti.resetgpio.bootloader.resetpinbit=1
+avreaopti.menu.resetupdipinsopti.resetgpio.bootloader.updipinbit=0
+avreaopti.menu.resetupdipinsopti.inputgpio=PF6: Input & PF7: GPIO (Danger! HV required)
+avreaopti.menu.resetupdipinsopti.inputupdi.bootloader.defaultentrycond=_all_8sec
+avreaopti.menu.resetupdipinsopti.inputgpio.bootloader.resetpinbit=0
+avreaopti.menu.resetupdipinsopti.inputgpio.bootloader.updipinbit=0
 
 #----------------------------------------#
 # millis/micros timing source            #
@@ -5123,12 +5145,12 @@ avreaopti.menu.wiremode.mands.build.wireabr=.wA
 #_____________________________________#
 avreaopti.menu.appspm.no=Disabled (SPM write from app is not yet supported)
 avreaopti.menu.appspm.no.bootloader.appspm=
-avreaopti.menu.appspm.no.bootloader.BOOTSIZE=0x00
+avreaopti.menu.appspm.no.bootloader.BOOTSIZE=0x02
 avreaopti.menu.appspm.no.build.appspmabr=
 avreaopti.menu.appspm.full=These options don't work,
 avreaopti.menu.appspm.full.bootloader.appspm=
 avreaopti.menu.appspm.full.build.appspmabr=.spmINVALID
-avreaopti.menu.appspm.full.bootloader.BOOTSIZE=0x00
+avreaopti.menu.appspm.full.bootloader.BOOTSIZE=0x02
 #avreaopti.menu.appspm.full=Anywhere after 0x0200 (warning: App allowed to overwrite itself)
 #avreaopti.menu.appspm.full.bootloader.appspm=-DSPM_FROM_APP=-1
 #avreaopti.menu.appspm.full.build.appspmabr=.spmALL
@@ -5216,6 +5238,66 @@ avreaopti.menu.flmap.lockdefault.build.flmapabr=.fld
 avreaopti.menu.flmap.unlocked.build.flmapabr=.ful
 avreaopti.menu.flmap.locksection0.build.flmapabr=.fl0
 
+#----------------------------------------#
+# Optiboot serial port                   #
+#________________________________________#
+avreaopti.menu.bootloaderusart.ser0=USART0: TX PA0, RX PA1
+avreaopti.menu.bootloaderusart.ser0.bootloader.port=_ser0
+avreaopti.menu.bootloaderusart.ser0.bootloader.portname=Serial
+avreaopti.menu.bootloaderusart.ser0.bootloader.portswap=0
+
+avreaopti.menu.bootloaderusart.ser0_alt1=USART0: TX PA4, RX PA5
+avreaopti.menu.bootloaderusart.ser0_alt1.bootloader.port=_ser0_alt1
+avreaopti.menu.bootloaderusart.ser0_alt1.bootloader.portname=Serial
+avreaopti.menu.bootloaderusart.ser0_alt1.bootloader.portswap=1
+
+avreaopti.menu.bootloaderusart.ser0_alt2=USART0: TX PA2, RX PA3
+avreaopti.menu.bootloaderusart.ser0_alt2.bootloader.port=_ser0_alt2
+avreaopti.menu.bootloaderusart.ser0_alt2.bootloader.portname=Serial
+avreaopti.menu.bootloaderusart.ser0_alt2.bootloader.portswap=2
+
+avreaopti.menu.bootloaderusart.ser0_alt3=USART0: TX PD4, RX PD5
+avreaopti.menu.bootloaderusart.ser0_alt3.bootloader.port=_ser0_alt3
+avreaopti.menu.bootloaderusart.ser0_alt3.bootloader.portname=Serial
+avreaopti.menu.bootloaderusart.ser0_alt3.bootloader.portswap=3
+
+avreaopti.menu.bootloaderusart.ser0_alt4=USART0: TX PC1, RX PC2
+avreaopti.menu.bootloaderusart.ser0_alt4.bootloader.port=_ser0_alt4
+avreaopti.menu.bootloaderusart.ser0_alt4.bootloader.portname=Serial
+avreaopti.menu.bootloaderusart.ser0_alt4.bootloader.portswap=4
+
+avreaopti.menu.bootloaderusart.ser1=USART1: TX PC0, RX PC1
+avreaopti.menu.bootloaderusart.ser1.bootloader.port=_ser1
+avreaopti.menu.bootloaderusart.ser1.bootloader.portname=Serial1
+avreaopti.menu.bootloaderusart.ser1.bootloader.portswap=0
+
+avreaopti.menu.bootloaderusart.ser1_alt2=USART1: TX PD6, RX PD7
+avreaopti.menu.bootloaderusart.ser1_alt2.bootloader.port=_ser1_alt2
+avreaopti.menu.bootloaderusart.ser1_alt2.bootloader.portname=Serial1
+avreaopti.menu.bootloaderusart.ser1_alt2.bootloader.portswap=2
+
+avreaopti.menu.bootloaderusart.ser2=USART2: TX PF0, RX PF1
+avreaopti.menu.bootloaderusart.ser2.bootloader.port=_ser2
+avreaopti.menu.bootloaderusart.ser2.bootloader.portname=Serial2
+avreaopti.menu.bootloaderusart.ser2.bootloader.portswap=0
+
+#----------------------------------------#
+# Optiboot Entry Conditions              #
+#________________________________________#
+avreaopti.menu.entrycond.default=Default (see documentation)
+avreaopti.menu.entrycond.extr=External (reset pin) (see documentation)
+avreaopti.menu.entrycond.extronly=External reset only (see documentation)
+avreaopti.menu.entrycond.all=Always (see documentation)
+avreaopti.menu.entrycond.poronly= Power On Only (see documentation)
+avreaopti.menu.entrycond.swr=SW-only (see documentation)
+avreaopti.menu.entrycond.extr_slow=External (reset pin), slow (see documentation)
+avreaopti.menu.entrycond.default.bootloader.entrycond={bootloader.defaultentrycond}
+avreaopti.menu.entrycond.extr.bootloader.entrycond=_extr
+avreaopti.menu.entrycond.extronly.bootloader.entrycond=_extronly
+avreaopti.menu.entrycond.poronly.bootloader.entrycond=_poronly_8sec
+avreaopti.menu.entrycond.all.bootloader.entrycond=_all_8sec
+avreaopti.menu.entrycond.swr.bootloader.entrycond=_swronly_8sec
+avreaopti.menu.entrycond.extr_slow.bootloader.entrycond=_extr_8sec
 
 
 ##########################################################################
@@ -5253,6 +5335,9 @@ avrebopti.build.flmapopts=
 # Bootloading parameters and fuses       #
 #________________________________________#
 avrebopti.bootloader.tool=avrdude
+avrebopti.bootloader.defaultentrycond=_extr
+avrebopti.bootloader.entrycond={bootloader.defaultentrycond}
+avrebopti.bootloader.file={runtime.platform.path}/bootloaders/optiboot_dex/hex/{bootloader.class}{bootloader.port}{bootloader.entrycond}.hex
 avrebopti.bootloader.WDTCFG=0b{bootloader.wdtwindowbits}{bootloader.wdttimeoutbits}
 avrebopti.bootloader.oschffrq=0
 avrebopti.bootloader.OSCCFG=0b0000{bootloader.oschffrq}000
@@ -5262,16 +5347,16 @@ avrebopti.bootloader.BODCFG=0b{bootloader.bodlevbits}{bootloader.bodmodebits}
 avrebopti.bootloader.updipinbit=1
 avrebopti.bootloader.SYSCFG0=0b110{bootloader.updipinbit}{bootloader.resetpinbit}00{bootloader.eesavebit}
 avrebopti.bootloader.CODESIZE=0x00
-avrebopti.bootloader.BOOTSIZE=0x02
+#avrebopti.bootloader.BOOTSIZE=0x02  # dummy overwritten by spm
 avrebopti.bootloader.avrdudestring=-Uflash:w:{bootloader.file}:i
 avrebopti.bootloader.pymcuprogstring=-f "{bootloader.file}" -a write
 avrebopti.bootloader.avrdudefuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
 avrebopti.bootloader.serupdifuse5=5:{bootloader.SYSCFG0}
+
 #----------------------------------------#
 # Upload and programming                 #
 #________________________________________#
-avrebopti.program.avrdudefuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
-avrebopti.program.serupdifuse5=5:{bootloader.SYSCFG0}
+
 avrebopti.upload.tool=avrdude
 avrebopti.upload.protocol=arduino
 avrebopti.upload.extra_params=-D
@@ -5303,41 +5388,56 @@ avrebopti.menu.chip.avr32eb14.build.mcu=avr32eb14
 avrebopti.menu.chip.avr32eb14.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb14.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb14.build.variant=14pin-ebseries
+avrebopti.menu.chip.avr32eb14.bootloader.class=optiboot_32ex
+
 avrebopti.menu.chip.avr32eb20=AVR32EB20
 avrebopti.menu.chip.avr32eb20.build.mcu=avr32eb20
 avrebopti.menu.chip.avr32eb20.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb20.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb20.build.variant=20pin-ebseries
+avrebopti.menu.chip.avr32eb20.bootloader.class=optiboot_32ex
+
 avrebopti.menu.chip.avr32eb28=AVR32EB28
 avrebopti.menu.chip.avr32eb28.build.mcu=avr32eb28
 avrebopti.menu.chip.avr32eb28.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb28.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb28.build.variant=28pin-ebseries
+avrebopti.menu.chip.avr32eb28.bootloader.class=optiboot_32ex
+
 avrebopti.menu.chip.avr32eb32=AVR32EB32
 avrebopti.menu.chip.avr32eb32.build.mcu=avr32eb32
 avrebopti.menu.chip.avr32eb32.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb32.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb32.build.variant=32pin-ebseries
+avrebopti.menu.chip.avr32eb32.bootloader.class=optiboot_32ex
+
 avrebopti.menu.chip.avr16eb14=AVR16EB14
 avrebopti.menu.chip.avr16eb14.build.mcu=avr16eb14
 avrebopti.menu.chip.avr16eb14.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb14.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb14.build.variant=14pin-ebseries
+avrebopti.menu.chip.avr16eb14.bootloader.class=optiboot_16ex
+
 avrebopti.menu.chip.avr16eb20=AVR16EB20
 avrebopti.menu.chip.avr16eb20.build.mcu=avr16eb20
 avrebopti.menu.chip.avr16eb20.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb20.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb20.build.variant=20pin-ebseries
+avrebopti.menu.chip.avr16eb20.bootloader.class=optiboot_16ex
+
 avrebopti.menu.chip.avr16eb28=AVR16EB28
 avrebopti.menu.chip.avr16eb28.build.mcu=avr16eb28
 avrebopti.menu.chip.avr16eb28.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb28.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb28.build.variant=28pin-ebseries
+avrebopti.menu.chip.avr16eb28.bootloader.class=optiboot_16ex
+
 avrebopti.menu.chip.avr16eb32=AVR16EB32
 avrebopti.menu.chip.avr16eb32.build.mcu=avr16eb32
 avrebopti.menu.chip.avr16eb32.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb32.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb32.build.variant=32pin-ebseries
+avrebopti.menu.chip.avr16eb32.bootloader.class=optiboot_16ex
 
 #----------------------------------------#
 # Clock speed and source options         #
@@ -5483,7 +5583,6 @@ avrebopti.menu.eesave.disabledisable=Neither retained
 avrebopti.menu.eesave.disabledisable.bootloader.eesavebit=0
 avrebopti.menu.eesave.disabledisable.bootloader.browsavebit=0
 
-
 #----------------------------------------#
 # Reset pin as input option              #
 #________________________________________#
@@ -5591,12 +5690,12 @@ avrebopti.menu.wiremode.mands.build.wireabr=.wA
 #_____________________________________#
 avrebopti.menu.appspm.no=Disabled (SPM write from app is not yet supported)
 avrebopti.menu.appspm.no.bootloader.appspm=
-avrebopti.menu.appspm.no.bootloader.BOOTSIZE=0x00
+avrebopti.menu.appspm.no.bootloader.BOOTSIZE=0x02
 avrebopti.menu.appspm.no.build.appspmabr=
 avrebopti.menu.appspm.full=
 avrebopti.menu.appspm.full.bootloader.appspm=
 avrebopti.menu.appspm.full.build.appspmabr=.spmINVALID
-avrebopti.menu.appspm.full.bootloader.BOOTSIZE=0x00
+avrebopti.menu.appspm.full.bootloader.BOOTSIZE=0x02
 #avrebopti.menu.appspm.full=Anywhere after 0x0200 (warning: App allowed to overwrite itself)
 #avrebopti.menu.appspm.full.bootloader.appspm=-DSPM_FROM_APP=-1
 #avrebopti.menu.appspm.full.build.appspmabr=.spmALL
@@ -5672,7 +5771,62 @@ avrebopti.menu.flmap.lockdefault.build.flmapabr=.fld
 avrebopti.menu.flmap.unlocked.build.flmapabr=.ful
 avrebopti.menu.flmap.locksection0.build.flmapabr=.fl0
 
+#----------------------------------------#
+# Optiboot serial port                   #
+#________________________________________#
+avrebopti.menu.bootloaderusart.ser0=USART0: TX PA0, RX PA1
+avrebopti.menu.bootloaderusart.ser0.bootloader.port=_ser0
+avrebopti.menu.bootloaderusart.ser0.bootloader.portname=Serial
+avrebopti.menu.bootloaderusart.ser0.bootloader.portswap=0
 
+avrebopti.menu.bootloaderusart.ser0_alt1=USART0: TX PA4, RX PA5
+avrebopti.menu.bootloaderusart.ser0_alt1.bootloader.port=_ser0_alt1
+avrebopti.menu.bootloaderusart.ser0_alt1.bootloader.portname=Serial
+avrebopti.menu.bootloaderusart.ser0_alt1.bootloader.portswap=1
+
+avrebopti.menu.bootloaderusart.ser0_alt2=USART0: TX PA2, RX PA3
+avrebopti.menu.bootloaderusart.ser0_alt2.bootloader.port=_ser0_alt2
+avrebopti.menu.bootloaderusart.ser0_alt2.bootloader.portname=Serial
+avrebopti.menu.bootloaderusart.ser0_alt2.bootloader.portswap=2
+
+avrebopti.menu.bootloaderusart.ser0_alt3=USART0: TX PD4, RX PD5
+avrebopti.menu.bootloaderusart.ser0_alt3.bootloader.port=_ser0_alt3
+avrebopti.menu.bootloaderusart.ser0_alt3.bootloader.portname=Serial
+avrebopti.menu.bootloaderusart.ser0_alt3.bootloader.portswap=3
+
+avrebopti.menu.bootloaderusart.ser0_alt4=USART0: TX PC1, RX PC2
+avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.port=_ser0_alt4
+avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.portname=Serial
+avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.portswap=4
+
+avrebopti.menu.bootloaderusart.ser1=USART1: TX PC0, RX PC1
+avrebopti.menu.bootloaderusart.ser1.bootloader.port=_ser1
+avrebopti.menu.bootloaderusart.ser1.bootloader.portname=Serial1
+avrebopti.menu.bootloaderusart.ser1.bootloader.portswap=0
+
+avrebopti.menu.bootloaderusart.ser1_alt2=USART1: TX PD6, RX PD7
+avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.port=_ser1_alt2
+avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.portname=Serial1
+avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.portswap=2
+
+
+#----------------------------------------#
+# Optiboot Entry Conditions              #
+#________________________________________#
+avrebopti.menu.entrycond.default=Default (see documentation)
+avrebopti.menu.entrycond.extr=External (reset pin) (see documentation)
+avrebopti.menu.entrycond.extronly=External reset only (see documentation)
+avrebopti.menu.entrycond.all=Always (see documentation)
+avrebopti.menu.entrycond.poronly= Power On Only (see documentation)
+avrebopti.menu.entrycond.swr=SW-only (see documentation)
+avrebopti.menu.entrycond.extr_slow=External (reset pin), slow (see documentation)
+avrebopti.menu.entrycond.default.bootloader.entrycond={bootloader.defaultentrycond}
+avrebopti.menu.entrycond.extr.bootloader.entrycond=_extr
+avrebopti.menu.entrycond.extronly.bootloader.entrycond=_extronly
+avrebopti.menu.entrycond.poronly.bootloader.entrycond=_poronly_8sec
+avrebopti.menu.entrycond.all.bootloader.entrycond=_all_8sec
+avrebopti.menu.entrycond.swr.bootloader.entrycond=_swronly_8sec
+avrebopti.menu.entrycond.extr_slow.bootloader.entrycond=_extr_8sec
 
 
 ########################################################################################################
@@ -5725,7 +5879,7 @@ azduinoboard.bootloader.WDTCFG=0b{bootloader.wdtwindowbits}{bootloader.wdttimeou
 azduinoboard.bootloader.wdtwindowbits=0000
 azduinoboard.bootloader.wdttimeotbits=0000
 azduinoboard.bootloader.BODCFG=0b{bootloader.bodlevbits}{bootloader.bodmodebits}
-azduinoboard.bootloader.SYSCFG0=0b1100{bootloader.resetpinbit}00
+azduinoboard.bootloader.SYSCFG0=0b1100{bootloader.resetpinbit}000
 azduinoboard.bootloader.SYSCFG1=0b000{bootloader.mviobits}{bootloader.sutbits}
 azduinoboard.bootloader.CODESIZE=0x00
 azduinoboard.bootloader.BOOTSIZE=0x01
