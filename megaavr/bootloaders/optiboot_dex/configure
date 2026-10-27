@@ -57,11 +57,9 @@ TX_PORT=$(echo $TX | sed -e 's/P\([A-F]\).*/PORT\1/')
 TX_PIN=$(echo $TX | sed -e 's/P[A-F]\([0-9]\)/\1/')
 UART_NUM=$(echo $UART | sed -e 's/[A-Z]\+//')
 
-if [ ${UART_NUM} -gt 3 ]; then
-  PMREG=USARTROUTEB
-else
-  PMREG=USARTROUTEA
-fi
+PMREG=USARTROUTEA
+if [ ${TYPE} = "Ex" -a ${UART_NUM} -gt 1 ]; then PMREG=USARTROUTEB; fi
+if [ ${TYPE} = "Dx" -a ${UART_NUM} -gt 3 ]; then PMREG=USARTROUTEB; fi
 
 cat <<EOF >config_${MCU}.h
 // configure: $* /
