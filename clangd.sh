@@ -37,7 +37,7 @@ EOF
 # extract mmcu
 mmcu=$( cat ${dir}/compile_commands.json  | jq  '.[0]' | grep -e "mmcu=" | sed -e 's/\"//' -e 's/\",//' )
 # get symbols from pre-processor
-echo 'main() {}' | ${AVRGCC}/avr-cpp ${mmcu} -dD | grep -e '__AVR_AVR' -e '__AVR_ARCH' | sed -e 's/#define /      \"-D/' -e 's/_ /_=/' -e 's/$/\",/'
+echo 'main() {}' | ${AVRGCC}/avr-cpp ${mmcu} -dD | grep -e '__AVR_AVR' -e '__AVR_ARCH' -e '__AVR_XMEGA' | sed -e 's/#define /      \"-D/' -e 's/_ /_=/' -e 's/$/\",/'
 
 # extract #define and #include
 options=$( cat ${dir}/compile_commands.json  | jq  '.[0]' | grep -e "\"-D" -e "\"-I" -e "mmcu=" )
