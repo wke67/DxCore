@@ -485,12 +485,12 @@ avrda.menu.millis.tcb3.build.millistimer=B3
 avrda.menu.millis.tcb4.build.millistimer=B4
 avrda.menu.millis.tca0.build.millistimer=A0
 avrda.menu.millis.tca1.build.millistimer=A1
-avrda.menu.millis.rtc=RTC internal osc (no micros)
-avrda.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrda.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrda.menu.millis.rtc.build.millistimer=RTC_OSC
-avrda.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrda.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrda.menu.millis.rtc=RTC internal osc (no micros)
+#avrda.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrda.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrda.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrda.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrda.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrda.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -982,12 +982,12 @@ avrdb.menu.millis.tcb3.build.millistimer=B3
 avrdb.menu.millis.tcb4.build.millistimer=B4
 avrdb.menu.millis.tca0.build.millistimer=A0
 avrdb.menu.millis.tca1.build.millistimer=A1
-avrdb.menu.millis.rtc=RTC internal osc (no micros)
-avrdb.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrdb.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrdb.menu.millis.rtc.build.millistimer=RTC_OSC
-avrdb.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrdb.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrdb.menu.millis.rtc=RTC internal osc (no micros)
+#avrdb.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrdb.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrdb.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrdb.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrdb.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrdb.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -1515,12 +1515,12 @@ avrdd.menu.millis.tcb0.build.millistimer=B0
 avrdd.menu.millis.tcb1.build.millistimer=B1
 avrdd.menu.millis.tcb2.build.millistimer=B2
 avrdd.menu.millis.tca0.build.millistimer=A0
-avrdd.menu.millis.rtc=RTC internal osc (no micros)
-avrdd.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrdd.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrdd.menu.millis.rtc.build.millistimer=RTC_OSC
-avrdd.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrdd.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrdd.menu.millis.rtc=RTC internal osc (no micros)
+#avrdd.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrdd.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrdd.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrdd.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrdd.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrdd.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -1916,12 +1916,12 @@ avrdu.menu.millis.tcbhighest.build.millistimer=B1
 avrdu.menu.millis.tcb0.build.millistimer=B0
 avrdu.menu.millis.tcb1.build.millistimer=B1
 avrdu.menu.millis.tca0.build.millistimer=A0
-avrdu.menu.millis.rtc=RTC internal osc (no micros)
-avrdu.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrdu.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrdu.menu.millis.rtc.build.millistimer=RTC_OSC
-avrdu.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrdu.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrdu.menu.millis.rtc=RTC internal osc (no micros)
+#avrdu.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrdu.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrdu.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrdu.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrdu.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrdu.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -2376,18 +2376,18 @@ avrea.menu.millis.tcb1=TCB1
 avrea.menu.millis.tcb3=TCB3
 avrea.menu.millis.tca0=TCA0
 avrea.menu.millis.tca1=TCA1
-avrea.menu.millis.rtc=RTC internal osc (no micros)
-avrea.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrea.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrea.menu.millis.rtc=RTC internal osc (no micros)
+#avrea.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrea.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
 avrea.menu.millis.tcb0.build.millistimer=B0
 avrea.menu.millis.tcb1.build.millistimer=B1
 avrea.menu.millis.tcb2.build.millistimer=B2
 avrea.menu.millis.tcb3.build.millistimer=B3
 avrea.menu.millis.tca0.build.millistimer=A0
 avrea.menu.millis.tca1.build.millistimer=A1
-avrea.menu.millis.rtc.build.millistimer=RTC_OSC
-avrea.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrea.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrea.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrea.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrea.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrea.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -2837,12 +2837,12 @@ avreb.menu.millis.tcb0.build.millistimer=B0
 avreb.menu.millis.tcb1.build.millistimer=B1
 #avreb.menu.millis.tce0.build.millistimer=E0
 #avreb.menu.millis.tcf0.build.millistimer=F0
-avreb.menu.millis.rtc=RTC internal osc (no micros)
-avreb.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avreb.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avreb.menu.millis.rtc.build.millistimer=RTC_OSC
-avreb.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avreb.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avreb.menu.millis.rtc=RTC internal osc (no micros)
+#avreb.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avreb.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avreb.menu.millis.rtc.build.millistimer=RTC_OSC
+#avreb.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avreb.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avreb.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -3394,12 +3394,12 @@ avrdaopti.menu.millis.tcb3.build.millistimer=B3
 avrdaopti.menu.millis.tcb4.build.millistimer=B4
 avrdaopti.menu.millis.tca0.build.millistimer=A0
 avrdaopti.menu.millis.tca1.build.millistimer=A1
-avrdaopti.menu.millis.rtc=RTC internal osc (no micros)
-avrdaopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrdaopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrdaopti.menu.millis.rtc.build.millistimer=RTC_OSC
-avrdaopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrdaopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrdaopti.menu.millis.rtc=RTC internal osc (no micros)
+#avrdaopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrdaopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrdaopti.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrdaopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrdaopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrdaopti.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -3970,12 +3970,12 @@ avrdbopti.menu.millis.tcb3.build.millistimer=B3
 avrdbopti.menu.millis.tcb4.build.millistimer=B4
 avrdbopti.menu.millis.tca0.build.millistimer=A0
 avrdbopti.menu.millis.tca1.build.millistimer=A1
-avrdbopti.menu.millis.rtc=RTC internal osc (no micros)
-avrdbopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrdbopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrdbopti.menu.millis.rtc.build.millistimer=RTC_OSC
-avrdbopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrdbopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrdbopti.menu.millis.rtc=RTC internal osc (no micros)
+#avrdbopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrdbopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrdbopti.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrdbopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrdbopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrdbopti.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -4559,12 +4559,12 @@ avrddopti.menu.millis.tcb1.build.millistimer=B1
 avrddopti.menu.millis.tcb2.build.millistimer=B2
 avrddopti.menu.millis.tca0.build.millistimer=A0
 #avrddopti.menu.millis.tcd0.build.millistimer=D0
-avrddopti.menu.millis.rtc=RTC internal osc (no micros)
-avrddopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrddopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrddopti.menu.millis.rtc.build.millistimer=RTC_OSC
-avrddopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrddopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avrddopti.menu.millis.rtc=RTC internal osc (no micros)
+#avrddopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrddopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrddopti.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrddopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrddopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrddopti.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -5052,18 +5052,18 @@ avreaopti.menu.millis.tcb1=TCB1
 avreaopti.menu.millis.tcb3=TCB3
 avreaopti.menu.millis.tca0=TCA0
 avreaopti.menu.millis.tca1=TCA1
-avreaopti.menu.millis.rtc=RTC internal osc (no micros)
-avreaopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avreaopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avreaopti.menu.millis.rtc=RTC internal osc (no micros)
+#avreaopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avreaopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
 avreaopti.menu.millis.tcb0.build.millistimer=B0
 avreaopti.menu.millis.tcb1.build.millistimer=B1
 avreaopti.menu.millis.tcb2.build.millistimer=B2
 avreaopti.menu.millis.tcb3.build.millistimer=B3
 avreaopti.menu.millis.tca0.build.millistimer=A0
 avreaopti.menu.millis.tca1.build.millistimer=A1
-avreaopti.menu.millis.rtc.build.millistimer=RTC_OSC
-avreaopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avreaopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avreaopti.menu.millis.rtc.build.millistimer=RTC_OSC
+#avreaopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avreaopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avreaopti.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
@@ -5603,12 +5603,12 @@ avrebopti.menu.millis.tcb0.build.millistimer=B0
 avrebopti.menu.millis.tcb1.build.millistimer=B1
 #avrebopti.menu.millis.tce0.build.millistimer=E0
 #avrebopti.menu.millis.tcf0.build.millistimer=F0
-avreaopti.menu.millis.rtc=RTC internal osc (no micros)
-avrebopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
-avrebopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
-avrebopti.menu.millis.rtc.build.millistimer=RTC_OSC
-avrebopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
-avrebopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
+#avreaopti.menu.millis.rtc=RTC internal osc (no micros)
+#avrebopti.menu.millis.rtcxtal=RTC w/w32.768 kHz ext. xtal, no micros
+#avrebopti.menu.millis.rtcxosc=RTC w/w32.768 kHz ext. osc no micros
+#avrebopti.menu.millis.rtc.build.millistimer=RTC_OSC
+#avrebopti.menu.millis.rtcxtal.build.millistimer=RTC_XTAL
+#avrebopti.menu.millis.rtcxosc.build.millistimer=RTC_XOSC
 avrebopti.menu.millis.disabled.build.millistimer=NONE
 
 #----------------------------------------#
