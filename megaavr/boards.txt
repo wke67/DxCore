@@ -1234,8 +1234,8 @@ avrdd.upload.maximum_size=0
 avrdd.upload.maximum_data_size=0
 # The maximum size and data size attributes are overridden by the selected chip. If you are avoiding specifying that somehow, there is no hope of anything working, so don't do that.
 # Each top-level entry supports at least a dozen parts with varying memory constraints.
-avrdd.program.serupdifuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
-avrdd.program.avrdudefuse5=5:{bootloader.SYSCFG0}
+avrdd.program.avrdudefuse5="-Ufuse5:w:{bootloader.SYSCFG0}:m"
+avrdd.program.serupdifuse5=5:{bootloader.SYSCFG0}
 
 
 #----------------------------------------#
@@ -4822,63 +4822,63 @@ avreaopti.menu.chip.avr64ea28.build.mcu=avr64ea28
 avreaopti.menu.chip.avr64ea28.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea28.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea28.build.variant=28pin-easeries
-avreaopti.menu.chip.avr64ea28.bootloader.class=optiboot_64ex
+avreaopti.menu.chip.avr64ea28.bootloader.class=optiboot_64ea
 
 avreaopti.menu.chip.avr64ea32=AVR64EA32
 avreaopti.menu.chip.avr64ea32.build.mcu=avr64ea32
 avreaopti.menu.chip.avr64ea32.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea32.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea32.build.variant=32pin-easeries
-avreaopti.menu.chip.avr64ea32.bootloader.class=optiboot_64ex
+avreaopti.menu.chip.avr64ea32.bootloader.class=optiboot_64ea
 
 avreaopti.menu.chip.avr64ea48=AVR64EA48
 avreaopti.menu.chip.avr64ea48.build.mcu=avr64ea48
 avreaopti.menu.chip.avr64ea48.upload.maximum_size=65536
 avreaopti.menu.chip.avr64ea48.upload.maximum_data_size=8192
 avreaopti.menu.chip.avr64ea48.build.variant=48pin-easeries
-avreaopti.menu.chip.avr64ea48.bootloader.class=optiboot_64ex
+avreaopti.menu.chip.avr64ea48.bootloader.class=optiboot_64ea
 
 avreaopti.menu.chip.avr32ea28=AVR32EA28
 avreaopti.menu.chip.avr32ea28.build.mcu=avr32ea28
 avreaopti.menu.chip.avr32ea28.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea28.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea28.build.variant=28pin-easeries
-avreaopti.menu.chip.avr32ea28.bootloader.class=optiboot_32ex
+avreaopti.menu.chip.avr32ea28.bootloader.class=optiboot_32ea
 
 avreaopti.menu.chip.avr32ea32=AVR32EA32
 avreaopti.menu.chip.avr32ea32.build.mcu=avr32ea32
 avreaopti.menu.chip.avr32ea32.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea32.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea32.build.variant=32pin-easeries
-avreaopti.menu.chip.avr32ea32.bootloader.class=optiboot_32ex
+avreaopti.menu.chip.avr32ea32.bootloader.class=optiboot_32ea
 
 avreaopti.menu.chip.avr32ea48=AVR32EA48
 avreaopti.menu.chip.avr32ea48.build.mcu=avr32ea48
 avreaopti.menu.chip.avr32ea48.upload.maximum_size=32768
 avreaopti.menu.chip.avr32ea48.upload.maximum_data_size=4096
 avreaopti.menu.chip.avr32ea48.build.variant=48pin-easeries
-avreaopti.menu.chip.avr32ea48.bootloader.class=optiboot_32ex
+avreaopti.menu.chip.avr32ea48.bootloader.class=optiboot_32ea
 
 avreaopti.menu.chip.avr16ea28=AVR16EA28
 avreaopti.menu.chip.avr16ea28.build.mcu=avr16ea28
 avreaopti.menu.chip.avr16ea28.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea28.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea28.build.variant=28pin-easeries
-avreaopti.menu.chip.avr16ea28.bootloader.class=optiboot_16ex
+avreaopti.menu.chip.avr16ea28.bootloader.class=optiboot_16ea
 
 avreaopti.menu.chip.avr16ea32=AVR16EA32
 avreaopti.menu.chip.avr16ea32.build.mcu=avr16ea32
 avreaopti.menu.chip.avr16ea32.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea32.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea32.build.variant=32pin-easeries
-avreaopti.menu.chip.avr16ea32.bootloader.class=optiboot_16ex
+avreaopti.menu.chip.avr16ea32.bootloader.class=optiboot_16ea
 
 avreaopti.menu.chip.avr16ea48=AVR16EA48
 avreaopti.menu.chip.avr16ea48.build.mcu=avr16ea48
 avreaopti.menu.chip.avr16ea48.upload.maximum_size=16384
 avreaopti.menu.chip.avr16ea48.upload.maximum_data_size=2048
 avreaopti.menu.chip.avr16ea48.build.variant=48pin-easeries
-avreaopti.menu.chip.avr16ea48.bootloader.class=optiboot_16ex
+avreaopti.menu.chip.avr16ea48.bootloader.class=optiboot_16ea
 
 #----------------------------------------#
 # Clock speed and source options         #
@@ -5388,56 +5388,56 @@ avrebopti.menu.chip.avr32eb14.build.mcu=avr32eb14
 avrebopti.menu.chip.avr32eb14.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb14.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb14.build.variant=14pin-ebseries
-avrebopti.menu.chip.avr32eb14.bootloader.class=optiboot_32ex
+avrebopti.menu.chip.avr32eb14.bootloader.class=optiboot_32eb
 
 avrebopti.menu.chip.avr32eb20=AVR32EB20
 avrebopti.menu.chip.avr32eb20.build.mcu=avr32eb20
 avrebopti.menu.chip.avr32eb20.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb20.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb20.build.variant=20pin-ebseries
-avrebopti.menu.chip.avr32eb20.bootloader.class=optiboot_32ex
+avrebopti.menu.chip.avr32eb20.bootloader.class=optiboot_32eb
 
 avrebopti.menu.chip.avr32eb28=AVR32EB28
 avrebopti.menu.chip.avr32eb28.build.mcu=avr32eb28
 avrebopti.menu.chip.avr32eb28.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb28.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb28.build.variant=28pin-ebseries
-avrebopti.menu.chip.avr32eb28.bootloader.class=optiboot_32ex
+avrebopti.menu.chip.avr32eb28.bootloader.class=optiboot_32eb
 
 avrebopti.menu.chip.avr32eb32=AVR32EB32
 avrebopti.menu.chip.avr32eb32.build.mcu=avr32eb32
 avrebopti.menu.chip.avr32eb32.upload.maximum_size=32768
 avrebopti.menu.chip.avr32eb32.upload.maximum_data_size=3072
 avrebopti.menu.chip.avr32eb32.build.variant=32pin-ebseries
-avrebopti.menu.chip.avr32eb32.bootloader.class=optiboot_32ex
+avrebopti.menu.chip.avr32eb32.bootloader.class=optiboot_32eb
 
 avrebopti.menu.chip.avr16eb14=AVR16EB14
 avrebopti.menu.chip.avr16eb14.build.mcu=avr16eb14
 avrebopti.menu.chip.avr16eb14.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb14.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb14.build.variant=14pin-ebseries
-avrebopti.menu.chip.avr16eb14.bootloader.class=optiboot_16ex
+avrebopti.menu.chip.avr16eb14.bootloader.class=optiboot_16eb
 
 avrebopti.menu.chip.avr16eb20=AVR16EB20
 avrebopti.menu.chip.avr16eb20.build.mcu=avr16eb20
 avrebopti.menu.chip.avr16eb20.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb20.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb20.build.variant=20pin-ebseries
-avrebopti.menu.chip.avr16eb20.bootloader.class=optiboot_16ex
+avrebopti.menu.chip.avr16eb20.bootloader.class=optiboot_16eb
 
 avrebopti.menu.chip.avr16eb28=AVR16EB28
 avrebopti.menu.chip.avr16eb28.build.mcu=avr16eb28
 avrebopti.menu.chip.avr16eb28.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb28.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb28.build.variant=28pin-ebseries
-avrebopti.menu.chip.avr16eb28.bootloader.class=optiboot_16ex
+avrebopti.menu.chip.avr16eb28.bootloader.class=optiboot_16eb
 
 avrebopti.menu.chip.avr16eb32=AVR16EB32
 avrebopti.menu.chip.avr16eb32.build.mcu=avr16eb32
 avrebopti.menu.chip.avr16eb32.upload.maximum_size=16384
 avrebopti.menu.chip.avr16eb32.upload.maximum_data_size=2048
 avrebopti.menu.chip.avr16eb32.build.variant=32pin-ebseries
-avrebopti.menu.chip.avr16eb32.bootloader.class=optiboot_16ex
+avrebopti.menu.chip.avr16eb32.bootloader.class=optiboot_16eb
 
 #----------------------------------------#
 # Clock speed and source options         #
@@ -5799,16 +5799,10 @@ avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.port=_ser0_alt4
 avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.portname=Serial
 avrebopti.menu.bootloaderusart.ser0_alt4.bootloader.portswap=4
 
-avrebopti.menu.bootloaderusart.ser1=USART1: TX PC0, RX PC1
-avrebopti.menu.bootloaderusart.ser1.bootloader.port=_ser1
-avrebopti.menu.bootloaderusart.ser1.bootloader.portname=Serial1
-avrebopti.menu.bootloaderusart.ser1.bootloader.portswap=0
-
-avrebopti.menu.bootloaderusart.ser1_alt2=USART1: TX PD6, RX PD7
-avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.port=_ser1_alt2
-avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.portname=Serial1
-avrebopti.menu.bootloaderusart.ser1_alt2.bootloader.portswap=2
-
+#avrebopti.menu.bootloaderusart.ser0_alt6=USART0: TX PF7, RX PF6  RESET/UPDI need SYSCFG setup
+#avrebopti.menu.bootloaderusart.ser0_alt6.bootloader.port=_ser0_alt6
+#avrebopti.menu.bootloaderusart.ser0_alt6.bootloader.portname=Serial
+#avrebopti.menu.bootloaderusart.ser0_alt6.bootloader.portswap=6
 
 #----------------------------------------#
 # Optiboot Entry Conditions              #
